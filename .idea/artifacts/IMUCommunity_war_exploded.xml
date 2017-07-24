@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="IMUCommunity:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/IMUCommunity_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="IMUCommunity/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="IMUCommunity" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate 5.2.10-5.2.10" />
+          <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="Struts 2-2.3.20.1" />
+          <element id="library" level="project" name="commons-logging-1.2" />
+          <element id="library" level="project" name="spring" />
+          <element id="library" level="project" name="EE_6" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.25-bin" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="IMUCommunity/javaeeApplication/javaEEApplication" />
+    </root>
+  </artifact>
+</component>

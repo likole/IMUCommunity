@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="spring">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Downloads/spring" />
+      <root url="jar://$USER_HOME$/Downloads/struts2-spring-plugin-2.5.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/spring" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/spring" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/spring" recursive="false" type="SOURCES" />
+  </library>
+</component>
