@@ -11,10 +11,10 @@
         <global-results>
             <result name="500">500.jsp</result>
         </global-results>
-        <!--<global-exception-mappings>-->
-            <!--<exception-mapping exception="java.lang.Exception" result="500"/>-->
-            <!--<exception-mapping exception="java.sql.SQLException" result="500"/>-->
-        <!--</global-exception-mappings>-->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="500"/>
+            <exception-mapping exception="java.sql.SQLException" result="500"/>
+        </global-exception-mappings>
 
         <action name="404" class="cn.likole.IMUCommunity.controller.ErrorController" method="notFound">
         </action>
@@ -24,5 +24,12 @@
                 <param name="root">map</param>
             </result>
         </action>
+
+        <action name="user_*" class="cn.likole.IMUCommunity.controller.UserController" method="{1}">
+            <result type="json" name="success">
+                <param name="root">map</param>
+            </result>
+        </action>
+
     </package>
 </struts>

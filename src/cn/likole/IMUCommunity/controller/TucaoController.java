@@ -1,6 +1,7 @@
 package cn.likole.IMUCommunity.controller;
 
 import cn.likole.IMUCommunity.dto.TucaoDto;
+import cn.likole.IMUCommunity.dto.TucaoListDto;
 import cn.likole.IMUCommunity.service.TucaoService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,9 +20,12 @@ import java.util.Map;
 public class TucaoController extends ActionSupport {
 
     @Autowired
+    ErrorController errorController;
+
+    @Autowired
     TucaoService tucaoService;
 
-    Map<String,Object> map=new HashMap<String,Object>();
+    Map<String, Object> map = new HashMap<String, Object>();
     TucaoDto data;
 
     public Map<String, Object> getMap() {
@@ -35,19 +40,44 @@ public class TucaoController extends ActionSupport {
         this.data = data;
     }
 
-    public String add(){
-        int rsCode = tucaoService.add(data.getToken(),data.getContent());
+    public String add() {
+        int rsCode = tucaoService.add(data.getToken(), data.getContent());
         setMessage(rsCode);
         return SUCCESS;
     }
 
-    private void setMessage(int rsCode)
-    {
-        map.put("status",rsCode);
-        switch (rsCode){
-            case 101:
-                map.put("message","token值无效!");
-                break;
-        }
+    public String getList() {
+        setMessage(0);
+        List<TucaoListDto> rs = tucaoService.getList(data.getOffset(), data.getNum(),data.getSelfToken());
+        map.put("data", rs);
+        map.put("next", data.getOffset() + rs.size());
+        return SUCCESS;
+    }
+
+    public String getLiked(){
+        setMessage(0);
+        map.put("data",tucaoService.getLiked(data.getSelfToken()));
+        return SUCCESS;
+    }
+
+    public String like(){
+        setMessage(tucaoService.like(data.getTid(),data.getSelfToken()));
+        return  SUCCESS;
+    }
+
+    public String getItem(){
+        setMessage(0);
+        map.put("data",tucaoService.getItem(data.getTid()));
+        return SUCCESS;
+    }
+
+    public String addComment(){
+        setMessage(tucaoService.addComment(data.getTid(),data.getComment()));
+        return  SUCCESS;
+    }
+
+    private void setMessage(int rsCode) {
+        map.put("status", rsCode);
+        map.put("message", errorController.getErrorInfo(rsCode));
     }
 }

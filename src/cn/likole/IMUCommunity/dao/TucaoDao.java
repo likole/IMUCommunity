@@ -1,9 +1,14 @@
 package cn.likole.IMUCommunity.dao;
 
 import cn.likole.IMUCommunity.entity.Tucao;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by likole on 7/24/17.
@@ -20,4 +25,20 @@ public class TucaoDao extends HibernateDaoSupport{
     {
         this.getHibernateTemplate().save(tucao);
     }
+
+    public List<Tucao> getList(int offset,int limit){
+        return this.getHibernateTemplate().execute(new HibernateCallback<List<Tucao>>() {
+            @Override
+            public List<Tucao> doInHibernate(Session session) throws HibernateException {
+                return session.createQuery("from Tucao order by time desc ").setFirstResult(offset).setMaxResults(limit).list();
+            }
+        });
+    }
+
+    public Tucao getByTid(int tid){
+        List<Tucao> rs= (List<Tucao>) this.getHibernateTemplate().find("from Tucao where tid=?",tid);
+        if(rs.size()>0) return rs.get(0);
+        return null;
+    }
+
 }
