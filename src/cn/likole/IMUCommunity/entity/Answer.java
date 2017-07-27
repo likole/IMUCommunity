@@ -4,7 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by likole on 7/27/17.
@@ -15,7 +15,7 @@ public class Answer {
     private int aid;
     private int uid;
     private String content;
-    private Timestamp time;
+    private Date time;
 
     @Id
     @Column(name = "ansid")
@@ -59,11 +59,11 @@ public class Answer {
 
     @Basic
     @Column(name = "time")
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

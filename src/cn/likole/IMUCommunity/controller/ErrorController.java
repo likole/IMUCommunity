@@ -36,6 +36,8 @@ public class ErrorController extends ActionSupport {
         errorInfo.put(206,"性别信息有误");
         errorInfo.put(207,"学号有误");
         errorInfo.put(301,"标题不能为空");
+        errorInfo.put(302,"内容不能为空");
+        errorInfo.put(303,"该评论不存在");
     }
 
     public  static String getErrorInfo(int code)

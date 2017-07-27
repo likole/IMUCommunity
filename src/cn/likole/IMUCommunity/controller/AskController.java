@@ -34,6 +34,15 @@ public class AskController extends ActionSupport implements ModelDriven<Ask> {
 
     String token;
     String key;
+    int ansid;
+
+    public int getAnsid() {
+        return ansid;
+    }
+
+    public void setAnsid(int ansid) {
+        this.ansid = ansid;
+    }
 
     public String getKey() {
         return key;
@@ -76,6 +85,27 @@ public class AskController extends ActionSupport implements ModelDriven<Ask> {
     public String search(){
         setMessage(0);
         map.put("data",askService.search(key));
+        return SUCCESS;
+    }
+
+    public String getAnswers(){
+        setMessage(0);
+        map.put("data",askService.getAnswers(ask.getAid()));
+        return SUCCESS;
+    }
+
+    public String addAnswer(){
+        setMessage(askService.addAnswer(ask.getAid(),token,ask.getDetail()));
+        return SUCCESS;
+    }
+
+    public String editAnswer(){
+        setMessage(askService.editAnswer(ansid,token,ask.getDetail()));
+        return SUCCESS;
+    }
+
+    public String deleteAnswer(){
+        setMessage(askService.deleteAnswer(ansid,token));
         return SUCCESS;
     }
 
