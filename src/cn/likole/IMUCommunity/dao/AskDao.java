@@ -40,7 +40,7 @@ public class AskDao extends HibernateDaoSupport{
     }
 
     public List<Ask> getLike(String key){
-        List<Ask> list= (List<Ask>) getHibernateTemplate().find("from Ask where title like '%?%'or detail like  '%?%'",key,key);
+        List<Ask> list= (List<Ask>) getHibernateTemplate().find("from Ask where title like ? or detail like  ?",'%'+key+'%','%'+key+'%');
         return list;
     }
 }
