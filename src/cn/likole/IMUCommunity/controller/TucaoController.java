@@ -20,9 +20,6 @@ import java.util.Map;
 public class TucaoController extends ActionSupport {
 
     @Autowired
-    ErrorController errorController;
-
-    @Autowired
     TucaoService tucaoService;
 
     Map<String, Object> map = new HashMap<String, Object>();
@@ -43,6 +40,16 @@ public class TucaoController extends ActionSupport {
     public String add() {
         int rsCode = tucaoService.add(data.getToken(), data.getContent());
         setMessage(rsCode);
+        return SUCCESS;
+    }
+
+    public String edit(){
+        setMessage(tucaoService.edit(data.getToken(),data.getTid(),data.getContent()));
+        return SUCCESS;
+    }
+
+    public String delete(){
+        setMessage(tucaoService.delete(data.getToken(),data.getTid()));
         return SUCCESS;
     }
 
@@ -67,7 +74,7 @@ public class TucaoController extends ActionSupport {
 
     public String getItem(){
         setMessage(0);
-        map.put("data",tucaoService.getItem(data.getTid()));
+        map.put("data",tucaoService.getItem(data.getTid(),data.getSelfToken()));
         return SUCCESS;
     }
 
@@ -78,6 +85,6 @@ public class TucaoController extends ActionSupport {
 
     private void setMessage(int rsCode) {
         map.put("status", rsCode);
-        map.put("message", errorController.getErrorInfo(rsCode));
+        map.put("message", ErrorController.getErrorInfo(rsCode));
     }
 }

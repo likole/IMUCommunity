@@ -41,4 +41,8 @@ public class TucaoDao extends HibernateDaoSupport{
         return null;
     }
 
+    public void delete(int tid){
+        getHibernateTemplate().bulkUpdate("delete from Tucao where tid=?",tid);
+    }
+
 }

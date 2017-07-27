@@ -1,4 +1,4 @@
-package cn.likole.IMUCommunity.dao;
+package cn.likole.IMUCommunity.dto;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ public class TucaoItemDto {
     String content;
     String time;
     int like_num;
+    boolean liked;
+    boolean self;
 
     List<String> comments;
 
@@ -51,5 +53,21 @@ public class TucaoItemDto {
 
     public void setComments(List<String> comments) {
         this.comments = comments;
+    }
+
+    public boolean isSelf() {
+        return self;
+    }
+
+    public void setSelf(boolean self) {
+        this.self = self;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
     }
 }

@@ -16,6 +16,7 @@ public class User {
     private String sid;
     private String spassword;
     private String token;
+    private int gender;
 
     @Id
     @Column(name = "uid")
@@ -103,5 +104,15 @@ public class User {
         result = 31 * result + (spassword != null ? spassword.hashCode() : 0);
         result = 31 * result + (token != null ? token.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "gender")
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 }

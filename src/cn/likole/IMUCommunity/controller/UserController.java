@@ -27,9 +27,6 @@ public class UserController extends ActionSupport implements ModelDriven<User> {
     }
 
     @Autowired
-    ErrorController errorController;
-
-    @Autowired
     UserService userService;
 
     public Map<String, Object> getMap() {
@@ -37,7 +34,9 @@ public class UserController extends ActionSupport implements ModelDriven<User> {
     }
 
     public String register(){
-        setMessage(userService.register(user.getName(),user.getPassword()));
+        int rsCode=userService.register(user.getName(),user.getPassword(),user.getGender());
+        setMessage(rsCode);
+        if(rsCode==0)map.put("token",userService.getToken(user.getName()));
         return SUCCESS;
     }
 
@@ -48,9 +47,20 @@ public class UserController extends ActionSupport implements ModelDriven<User> {
         return SUCCESS;
     }
 
+    public String edit(){
+        setMessage(userService.edit(user.getToken(),user.getGender(),user.getSid(),user.getSpassword()));
+        return SUCCESS;
+    }
+
+    public String getInfo(){
+        setMessage(0);
+        map.put("data",userService.get(user.getToken()));
+        return  SUCCESS;
+    }
+
     private void setMessage(int rsCode)
     {
         map.put("status",rsCode);
-        map.put("message",errorController.getErrorInfo(rsCode));
+        map.put("message",ErrorController.getErrorInfo(rsCode));
     }
 }

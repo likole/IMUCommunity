@@ -31,5 +31,17 @@
             </result>
         </action>
 
+        <action name="notification_*" class="cn.likole.IMUCommunity.controller.NotificationController" method="{1}">
+            <result type="json" name="success">
+                <param name="root">map</param>
+            </result>
+        </action>
+
+        <action name="ask_*" class="cn.likole.IMUCommunity.controller.AskController" method="{1}">
+            <result type="json" name="success">
+                <param name="root">map</param>
+            </result>
+        </action>
+
     </package>
 </struts>

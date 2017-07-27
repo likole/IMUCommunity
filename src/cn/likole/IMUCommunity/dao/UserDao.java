@@ -30,6 +30,12 @@ public class UserDao extends HibernateDaoSupport {
         return list.get(0);
     }
 
+    public User getByUid(int uid){
+        List<User> list= (List<User>) getHibernateTemplate().find("from User where uid=?",uid);
+        if(list.size()==0) return null;
+        return list.get(0);
+    }
+
     public void save(User user)
     {
         this.getHibernateTemplate().save(user);
