@@ -69,4 +69,12 @@ public class UserService {
     }
 
 
+    public int setAvatar(String token,String filename){
+        User user=userDao.getByToken(token);
+        if(user==null) return 101;
+
+        user.setAvatar(filename);
+        return 0;
+    }
+
 }

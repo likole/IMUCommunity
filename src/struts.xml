@@ -6,10 +6,11 @@
 
 <struts>
     <constant name="struts.devMode" value="true"/>
+    <constant name="struts.multipart.saveDir" value="/tmp"/>
     <package name="default" extends="json-default" namespace="/">
         <default-action-ref name="404"/>
         <global-results>
-            <result name="500">500.jsp</result>
+            <result name="500">WEB-INF/500.jsp</result>
         </global-results>
         <global-exception-mappings>
             <exception-mapping exception="java.lang.Exception" result="500"/>
@@ -42,6 +43,20 @@
                 <param name="root">map</param>
             </result>
         </action>
+    </package>
+    <package name="admin" extends="struts-default" namespace="/admin">
+        <global-results>
+            <result name="500">WEB-INF/500.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="500"/>
+            <exception-mapping exception="java.sql.SQLException" result="500"/>
+        </global-exception-mappings>
 
+        <action name="*" class="cn.likole.IMUCommunity.controller.AdminController" method="{1}">
+            <result name="input">
+                /WEB-INF/login.html
+            </result>
+        </action>
     </package>
 </struts>

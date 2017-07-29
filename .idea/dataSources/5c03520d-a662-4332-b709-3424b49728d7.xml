@@ -291,24 +291,28 @@ tid</ColNames>
       <DataType>varchar(36)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="67" parent="14" name="user_token_uindex">
+    <column id="67" parent="14" name="avatar">
+      <Position>8</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <index id="68" parent="14" name="user_token_uindex">
       <ColNames>token</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="68" parent="14" name="User_name_uindex">
+    <index id="69" parent="14" name="User_name_uindex">
       <ColNames>name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="69" parent="14" name="PRIMARY">
+    <key id="70" parent="14" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>uid</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="70" parent="14" name="User_name_uindex">
+    <key id="71" parent="14" name="User_name_uindex">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>User_name_uindex</UnderlyingIndexName>
     </key>
-    <key id="71" parent="14" name="user_token_uindex">
+    <key id="72" parent="14" name="user_token_uindex">
       <ColNames>token</ColNames>
       <UnderlyingIndexName>user_token_uindex</UnderlyingIndexName>
     </key>

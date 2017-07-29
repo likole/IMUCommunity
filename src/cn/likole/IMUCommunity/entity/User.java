@@ -17,6 +17,7 @@ public class User {
     private String spassword;
     private String token;
     private int gender;
+    private String avatar;
 
     @Id
     @Column(name = "uid")
@@ -114,5 +115,15 @@ public class User {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    @Basic
+    @Column(name = "avatar")
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
