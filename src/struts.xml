@@ -27,9 +27,10 @@
         </action>
 
         <action name="tucao" class="cn.likole.IMUCommunity.controller.AdminController" method="tucao">
-            <result name="success">
-                /WEB-INF/tucao.jsp
-            </result>
+            <result>/WEB-INF/tucao.jsp</result>
+        </action>
+        <action name="user" class="cn.likole.IMUCommunity.controller.AdminController" method="user">
+            <result>/WEB-INF/user.jsp</result>
         </action>
     </package>
     <package name="default" extends="json-default" namespace="/">

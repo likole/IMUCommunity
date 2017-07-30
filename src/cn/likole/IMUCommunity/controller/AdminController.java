@@ -1,6 +1,7 @@
 package cn.likole.IMUCommunity.controller;
 
 import cn.likole.IMUCommunity.dto.TucaoAdminDto;
+import cn.likole.IMUCommunity.entity.User;
 import cn.likole.IMUCommunity.service.AdminService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
@@ -17,6 +18,15 @@ public class AdminController extends ActionSupport {
     String username;
     String password;
     List<TucaoAdminDto> tucaoAdminDtos;
+    List<User> users;
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public List<TucaoAdminDto> getTucaoAdminDtos() {
         return tucaoAdminDtos;
@@ -60,6 +70,11 @@ public class AdminController extends ActionSupport {
 
     public String tucao(){
         tucaoAdminDtos= adminService.getTucaoList();
+        return SUCCESS;
+    }
+
+    public String user(){
+        users=adminService.getUserList();
         return SUCCESS;
     }
 

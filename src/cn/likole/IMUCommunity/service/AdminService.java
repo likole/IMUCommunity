@@ -8,6 +8,7 @@ import cn.likole.IMUCommunity.dto.LikesAdminDto;
 import cn.likole.IMUCommunity.dto.TucaoAdminDto;
 import cn.likole.IMUCommunity.entity.Likes;
 import cn.likole.IMUCommunity.entity.Tucao;
+import cn.likole.IMUCommunity.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +33,10 @@ public class AdminService {
     @Autowired
     CommentsDao commentsDao;
 
+    /**
+     * 吐槽列表
+     * @return
+     */
     public List<TucaoAdminDto> getTucaoList(){
         //获取所有吐槽
         List<Tucao> tucaos=tucaoDao.getAll();
@@ -66,5 +71,10 @@ public class AdminService {
         }
 
         return tucaoAdminDtos;
+    }
+
+
+    public List<User> getUserList(){
+        return userDao.getAll();
     }
 }

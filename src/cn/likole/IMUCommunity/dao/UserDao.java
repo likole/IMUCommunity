@@ -40,4 +40,8 @@ public class UserDao extends HibernateDaoSupport {
     {
         this.getHibernateTemplate().save(user);
     }
+
+    public List<User> getAll(){
+        return (List<User>) getHibernateTemplate().find("from User ");
+    }
 }

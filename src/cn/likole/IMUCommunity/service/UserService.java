@@ -29,6 +29,7 @@ public class UserService {
         user.setName(username);
         user.setPassword(password);
         user.setGender(gender);
+        user.setAvatar("default.png");
         user.setToken(UUID.randomUUID().toString());
         userDao.save(user);
         return 0;
