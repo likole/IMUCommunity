@@ -12,6 +12,15 @@ public class TucaoItemDto {
     int like_num;
     boolean liked;
     boolean self;
+    int gender;
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
 
     List<String> comments;
 

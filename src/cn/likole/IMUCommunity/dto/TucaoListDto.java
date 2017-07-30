@@ -10,6 +10,15 @@ public class TucaoListDto {
     int comment_num;
     int like_num;
     boolean liked;
+    int gender;
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
 
     public int getId() {
         return id;

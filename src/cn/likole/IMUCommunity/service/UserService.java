@@ -22,9 +22,9 @@ public class UserService {
 
     public int register(String username,String password,int gender)
     {
-        if(userDao.getByUsername(username)!=null) return 201;
         if(username.length()==0) return 205;
         if(password.length()!=32) return 202;
+        if(userDao.getByUsername(username)!=null) return 201;
         User user=new User();
         user.setName(username);
         user.setPassword(password);
@@ -63,6 +63,7 @@ public class UserService {
         userDto.setName(user.getName());
         userDto.setGender(user.getGender());
         userDto.setSid(user.getSid());
+        userDto.setAvatar(user.getAvatar());
         userDto.setSpassword(user.getSpassword());
 
         return  userDto;

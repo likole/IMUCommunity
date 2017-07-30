@@ -294,6 +294,7 @@ tid</ColNames>
     <column id="67" parent="14" name="avatar">
       <Position>8</Position>
       <DataType>varchar(40)|0</DataType>
+      <DefaultExpression>&apos;default.png&apos;</DefaultExpression>
     </column>
     <index id="68" parent="14" name="user_token_uindex">
       <ColNames>token</ColNames>

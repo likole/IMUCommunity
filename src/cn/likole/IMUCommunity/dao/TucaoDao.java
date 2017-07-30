@@ -30,9 +30,13 @@ public class TucaoDao extends HibernateDaoSupport{
         return this.getHibernateTemplate().execute(new HibernateCallback<List<Tucao>>() {
             @Override
             public List<Tucao> doInHibernate(Session session) throws HibernateException {
-                return session.createQuery("from Tucao order by time desc ").setFirstResult(offset).setMaxResults(limit).list();
+                return session.createQuery("from Tucao order by tid desc ").setFirstResult(offset).setMaxResults(limit).list();
             }
         });
+    }
+
+    public List<Tucao> getAll(){
+       return (List<Tucao>) getHibernateTemplate().find("from Tucao order by tid desc ");
     }
 
     public Tucao getByTid(int tid){

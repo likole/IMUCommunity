@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh" class="ie9 no-js"> <![endif]-->
@@ -49,7 +50,7 @@
             <div class="login-content">
                 <h1>IMU Community 管理系统登陆</h1>
                 <p>IMU Community是一个匿名社区，它集合了吐槽，咨询，通知等模块，并集成了常用功能，如成绩查询，绩点计算。</p>
-                <form action="javascript:;" class="login-form" method="post">
+                <form action="login" class="login-form" method="post">
                     <div class="row">
                         <div class="col-xs-6">
                             <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username" required/> </div>
@@ -62,7 +63,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 text-right">
-                            <button class="btn blue" type="submit">Sign In</button>
+                            <button class="btn blue" type="submit">登陆</button>
                         </div>
                     </div>
                 </form>

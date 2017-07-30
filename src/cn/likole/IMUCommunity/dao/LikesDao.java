@@ -28,4 +28,8 @@ public class LikesDao extends HibernateDaoSupport {
     public List<Likes> getAllByUid(int uid){
         return (List<Likes>) this.getHibernateTemplate().find("from Likes where uid=?",uid);
     }
+
+    public List<Likes> getAllByTid(int tid){
+        return (List<Likes>) this.getHibernateTemplate().find("from Likes where tid=?",tid);
+    }
 }

@@ -7,6 +7,31 @@
 <struts>
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.multipart.saveDir" value="/tmp"/>
+    <package name="admin" extends="struts-default" namespace="/admin">
+        <default-action-ref name="login"/>
+        <global-results>
+            <result name="500">/WEB-INF/500.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="500"/>
+            <exception-mapping exception="java.sql.SQLException" result="500"/>
+        </global-exception-mappings>
+
+        <action name="login" class="cn.likole.IMUCommunity.controller.AdminController" method="login">
+            <result name="input">
+                /WEB-INF/login.jsp
+            </result>
+            <result type="redirect">
+                tucao.action
+            </result>
+        </action>
+
+        <action name="tucao" class="cn.likole.IMUCommunity.controller.AdminController" method="tucao">
+            <result name="success">
+                /WEB-INF/tucao.jsp
+            </result>
+        </action>
+    </package>
     <package name="default" extends="json-default" namespace="/">
         <default-action-ref name="404"/>
         <global-results>
@@ -41,21 +66,6 @@
         <action name="ask_*" class="cn.likole.IMUCommunity.controller.AskController" method="{1}">
             <result type="json" name="success">
                 <param name="root">map</param>
-            </result>
-        </action>
-    </package>
-    <package name="admin" extends="struts-default" namespace="/admin">
-        <global-results>
-            <result name="500">WEB-INF/500.jsp</result>
-        </global-results>
-        <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="500"/>
-            <exception-mapping exception="java.sql.SQLException" result="500"/>
-        </global-exception-mappings>
-
-        <action name="*" class="cn.likole.IMUCommunity.controller.AdminController" method="{1}">
-            <result name="input">
-                /WEB-INF/login.html
             </result>
         </action>
     </package>

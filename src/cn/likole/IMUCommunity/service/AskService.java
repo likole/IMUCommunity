@@ -48,8 +48,9 @@ public class AskService {
             askDto.setTitle(ask.getTitle());
             askDto.setTime(TimeFormatUtil.formatTime(ask.getTime()));
             askDto.setDetail(ask.getDetail());
-            askDto.setName(userDao.getByUid(ask.getUid()).getName());
-
+            User user=userDao.getByUid(ask.getUid());
+            askDto.setName(user.getName());
+            askDto.setAvatar(user.getAvatar());
             askDtos.add(askDto);
         }
 
@@ -74,7 +75,9 @@ public class AskService {
             askDto.setTitle(ask.getTitle());
             askDto.setTime(TimeFormatUtil.formatTime(ask.getTime()));
             askDto.setDetail(ask.getDetail());
-            askDto.setName(userDao.getByUid(ask.getUid()).getName());
+            User user=userDao.getByUid(ask.getUid());
+            askDto.setName(user.getName());
+            askDto.setAvatar(user.getAvatar());
 
             askDtos.add(askDto);
         }
@@ -106,6 +109,7 @@ public class AskService {
             askDto.setTime(TimeFormatUtil.formatTime(ask.getTime()));
             askDto.setDetail(ask.getDetail());
             askDto.setName(user.getName());
+            askDto.setAvatar(user.getAvatar());
 
             askDtos.add(askDto);
         }
@@ -164,7 +168,9 @@ public class AskService {
         for (Answer answer : answers) {
             AnswerDto answerDto = new AnswerDto();
             answerDto.setId(answer.getAnsid());
-            answerDto.setName(userDao.getByUid(answer.getUid()).getName());
+            User user=userDao.getByUid(answer.getUid());
+            answerDto.setName(user.getName());
+            answerDto.setAvatar(user.getAvatar());
             answerDto.setContent(answer.getContent());
             answerDto.setTime(TimeFormatUtil.formatTime(answer.getTime()));
 
@@ -173,6 +179,14 @@ public class AskService {
         return answerDtos;
     }
 
+
+    /**
+     * 添加回答
+     * @param aid
+     * @param token
+     * @param content
+     * @return
+     */
     public int addAnswer(int aid,String token ,String content){
         User user=userDao.getByToken(token);
         if(user==null) return 101;
@@ -189,6 +203,13 @@ public class AskService {
     }
 
 
+    /**
+     * 编辑回答
+     * @param ansid
+     * @param token
+     * @param content
+     * @return
+     */
     public int editAnswer(int ansid,String token ,String content){
         User user=userDao.getByToken(token);
         if(user==null) return 101;
@@ -203,6 +224,13 @@ public class AskService {
         return 0;
     }
 
+
+    /**
+     * 删除回答
+     * @param ansid
+     * @param token
+     * @return
+     */
     public int deleteAnswer(int ansid,String token){
         User user=userDao.getByToken(token);
         if(user==null) return 101;

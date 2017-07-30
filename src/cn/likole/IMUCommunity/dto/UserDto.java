@@ -6,6 +6,7 @@ package cn.likole.IMUCommunity.dto;
 public class UserDto {
     String name;
     int gender;
+    String avatar;
     String sid;
     String spassword;
 
@@ -39,5 +40,13 @@ public class UserDto {
 
     public void setSpassword(String spassword) {
         this.spassword = spassword;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

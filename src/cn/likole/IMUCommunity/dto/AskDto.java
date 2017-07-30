@@ -9,6 +9,15 @@ public class AskDto {
     String detail;
     String time;
     String name;
+    String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public int getAid() {
         return aid;

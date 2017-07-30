@@ -1,6 +1,9 @@
 package cn.likole.IMUCommunity.service;
 
-import cn.likole.IMUCommunity.dao.*;
+import cn.likole.IMUCommunity.dao.CommentsDao;
+import cn.likole.IMUCommunity.dao.LikesDao;
+import cn.likole.IMUCommunity.dao.TucaoDao;
+import cn.likole.IMUCommunity.dao.UserDao;
 import cn.likole.IMUCommunity.dto.TucaoItemDto;
 import cn.likole.IMUCommunity.dto.TucaoListDto;
 import cn.likole.IMUCommunity.entity.Comments;
@@ -116,6 +119,7 @@ public class TucaoService {
             tucaoListDto.setLike_num(tucao.getCommentNum());
             tucaoListDto.setContent(tucao.getContent());
             tucaoListDto.setLiked(true);
+            tucaoListDto.setGender(userDao.getByUid(tucao.getUid()).getGender());
 
             tucaoListDtos.add(tucaoListDto);
         }
@@ -129,7 +133,7 @@ public class TucaoService {
      *
      * @param offset
      * @param limit
-     * @param selfToken
+     * @param selfToken 标注是否喜欢过
      * @return
      */
     public List<TucaoListDto> getList(int offset, int limit, String selfToken) {
@@ -155,7 +159,7 @@ public class TucaoService {
             rsTmp.setLike_num(tucao.getLikeNum());
             rsTmp.setComment_num(tucao.getCommentNum());
             rsTmp.setTime(TimeFormatUtil.formatTime(tucao.getTime()));
-
+            rsTmp.setGender(userDao.getByUid(tucao.getUid()).getGender());
             //喜欢
             if (showLiked == 1)
                 rsTmp.setLiked(likesDao.exist(tucao.getTid(), uid));
@@ -205,13 +209,14 @@ public class TucaoService {
      */
     public int addComment(int tid, String comment) {
 
-        if (tucaoDao.getByTid(tid) == null) return 103;
+        Tucao tucao=tucaoDao.getByTid(tid);
+        if (tucao == null) return 103;
         if (comment.length() < 3) return 104;
 
         Comments comments = new Comments();
         comments.setTid(tid);
         comments.setContent(comment);
-
+        tucao.setCommentNum(tucao.getCommentNum()+1);
         commentsDao.save(comments);
 
         return 0;
@@ -240,6 +245,7 @@ public class TucaoService {
         tucaoItemDto.setContent(tucao.getContent());
         tucaoItemDto.setLike_num(tucao.getLikeNum());
         tucaoItemDto.setTime(TimeFormatUtil.formatTime(tucao.getTime()));
+        tucaoItemDto.setGender(userDao.getByUid(tucao.getUid()).getGender());
 
         if (login == true) {
             //是否喜欢过
@@ -254,4 +260,6 @@ public class TucaoService {
 
         return tucaoItemDto;
     }
+
+
 }

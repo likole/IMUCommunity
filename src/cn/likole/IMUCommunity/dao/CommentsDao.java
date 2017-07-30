@@ -21,6 +21,11 @@ public class CommentsDao extends HibernateDaoSupport{
         return (List<String>) getHibernateTemplate().find("select content from Comments where tid=?",tid);
     }
 
+    public List<Comments> getAllByTid(int tid){
+        return (List<Comments>) getHibernateTemplate().find("from Comments where tid=?",tid);
+    }
+
+
     public void save(Comments comments){
         getHibernateTemplate().save(comments);
     }
