@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>吐槽管理 | IMUCommunity</title>
+    <title>用户管理 | IMUCommunity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN LAYOUT FIRST STYLES -->
@@ -84,19 +84,19 @@
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
                                 <li class="active">
-                                    <a href="dashboard_3.html">
+                                    <a href="user">
                                         <i class="icon-graph"></i> 用户管理 </a>
                                 </li>
                                 <li>
-                                    <a href="index.html">
+                                    <a href="tucao">
                                         <i class="icon-bar-chart"></i> 吐槽管理 </a>
                                 </li>
                                 <li>
-                                    <a href="dashboard_2.html">
+                                    <a href="ask">
                                         <i class="icon-bulb"></i> 咨询管理 </a>
                                 </li>
                                 <li>
-                                    <a href="dashboard_3.html">
+                                    <a href="notification">
                                         <i class="icon-graph"></i> 通知管理 </a>
                                 </li>
                             </ul>
@@ -133,7 +133,7 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>吐槽管理</h1>
+                <h1>用户管理</h1>
                 <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                 <!--<a href="#">Home</a>-->
@@ -147,7 +147,7 @@
             <!-- END BREADCRUMBS -->
             <!-- BEGIN PAGE BASE CONTENT -->
             <div class="content">
-                <table class="table table-striped table-hover" id="tucaoTable">
+                <table class="table table-striped table-hover" id="userTable">
                     <thead>
                     <tr>
                         <th></th>
@@ -224,8 +224,8 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script>
     $(document).ready(function () {
-        $('#tucaoTable').DataTable({
-            "order": [[0, "desc"]],
+        $('#userTable').DataTable({
+            "order": [[1, "desc"]],
             "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
             "buttons": [
                 { extend: 'print', className: 'btn dark btn-outline' },

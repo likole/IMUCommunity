@@ -1,6 +1,9 @@
 package cn.likole.IMUCommunity.controller;
 
+import cn.likole.IMUCommunity.dto.AskAdminDto;
+import cn.likole.IMUCommunity.dto.NotificationDto;
 import cn.likole.IMUCommunity.dto.TucaoAdminDto;
+import cn.likole.IMUCommunity.entity.OfficialAccount;
 import cn.likole.IMUCommunity.entity.User;
 import cn.likole.IMUCommunity.service.AdminService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,13 +22,36 @@ public class AdminController extends ActionSupport {
     String password;
     List<TucaoAdminDto> tucaoAdminDtos;
     List<User> users;
+    List<AskAdminDto> askAdminDtos;
+    AskAdminDto askAdminDto;
+    int aid;
+    int oid;
+    OfficialAccount officialAccount;
+    List<NotificationDto> notifications;
 
-    public List<User> getUsers() {
-        return users;
+
+    public OfficialAccount getOfficialAccount() {
+        return officialAccount;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setOfficialAccount(OfficialAccount officialAccount) {
+        this.officialAccount = officialAccount;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
+    public List<NotificationDto> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<NotificationDto> notifications) {
+        this.notifications = notifications;
     }
 
     public List<TucaoAdminDto> getTucaoAdminDtos() {
@@ -34,6 +60,38 @@ public class AdminController extends ActionSupport {
 
     public void setTucaoAdminDtos(List<TucaoAdminDto> tucaoAdminDtos) {
         this.tucaoAdminDtos = tucaoAdminDtos;
+    }
+
+    public int getAid() {
+        return aid;
+    }
+
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
+    public AskAdminDto getAskAdminDto() {
+        return askAdminDto;
+    }
+
+    public void setAskAdminDto(AskAdminDto askAdminDto) {
+        this.askAdminDto = askAdminDto;
+    }
+
+    public List<AskAdminDto> getAskAdminDtos() {
+        return askAdminDtos;
+    }
+
+    public void setAskAdminDtos(List<AskAdminDto> askAdminDtos) {
+        this.askAdminDtos = askAdminDtos;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public String getUsername() {
@@ -78,4 +136,28 @@ public class AdminController extends ActionSupport {
         return SUCCESS;
     }
 
+    public String user_detail(){
+        return SUCCESS;
+    }
+
+    public String ask(){
+        askAdminDtos=adminService.getAskList();
+        return SUCCESS;
+    }
+
+    public String ask_detail(){
+        askAdminDto=adminService.getAskDetail(aid);
+        return SUCCESS;
+    }
+
+    public String notification(){
+        notifications=adminService.getList();
+        return SUCCESS;
+    }
+
+    public String notification_o(){
+        officialAccount=adminService.getNameByOid(oid);
+        notifications=adminService.getByOid(oid);
+        return SUCCESS;
+    }
 }

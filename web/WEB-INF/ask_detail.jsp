@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>吐槽管理 | IMUCommunity</title>
+    <title>咨询管理 | IMUCommunity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN LAYOUT FIRST STYLES -->
@@ -32,7 +32,7 @@
     <link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="../assets/pages/css/contact.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/pages/css/profile.min.css" rel="stylesheet" type="text/css">
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="../assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css"/>
@@ -87,11 +87,11 @@
                                     <a href="user">
                                         <i class="icon-graph"></i> 用户管理 </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="tucao">
                                         <i class="icon-bar-chart"></i> 吐槽管理 </a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="ask">
                                         <i class="icon-bulb"></i> 咨询管理 </a>
                                 </li>
@@ -133,7 +133,11 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>吐槽管理</h1>
+                <h1>咨询详情</h1>
+                <button class="btn default m-icon" onclick="history.go(-1);">
+                    <i class="m-icon-swapleft"></i>
+                    返回
+                </button>
                 <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                 <!--<a href="#">Home</a>-->
@@ -146,77 +150,53 @@
             </div>
             <!-- END BREADCRUMBS -->
             <!-- BEGIN PAGE BASE CONTENT -->
-            <div class="content">
-                <table class="table table-striped table-hover" id="tucaoTable">
-                    <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>时间</th>
-                        <th>用户</th>
-                        <th>内容</th>
-                        <th>喜欢/评论</th>
-                        <th>删除</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <s:iterator value="tucaoAdminDtos" id="t">
-                        <tr>
-                            <td><s:property value="#t.tid"/></td>
-                            <td><s:property value="#t.time"/></td>
-                            <td><s:property value="#t.name"/></td>
-                            <td><s:property value="#t.content"/></td>
-                            <td><a  data-toggle="modal" href="#modallike<s:property value="#t.tid"/>"><s:property value="#t.like_num"/></a>/<a  data-toggle="modal" href="#modalcomment<s:property value="#t.tid"/>"><s:property value="#t.comment_num"/></a></td>
-                            <td><button class="btn btn-outline red-mint uppercase" data-toggle="confirmation">删除</button></td>
-                        </tr>
-                    </s:iterator>
-                    </tbody>
-                </table>
+            <div class="row">
+                <div class="portlet light profile-sidebar-portlet bordered col-md-2 col-xs-4">
+                    <!-- SIDEBAR USERPIC -->
+                    <div class="profile-userpic">
+                        <img src="../avatar/<s:property value="askAdminDto.avatar" />" class="img-responsive" alt="">
+                    </div>
+                    <!-- END SIDEBAR USERPIC -->
+                    <!-- SIDEBAR USER TITLE -->
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name"><s:property value="askAdminDto.name"/>(<s:property
+                                value="askAdminDto.uid"/>)
+                        </div>
+                        <div class="profile-usertitle-job"><s:property value="askAdminDto.time"/></div>
+                    </div>
+                    <!-- END SIDEBAR USER TITLE -->
+                </div>
+                <div class="col-md-10 col-xs-8">
+                    <h2><s:property value="askAdminDto.title"/></h2>
+                    <p><s:property value="askAdminDto.detail"/></p>
+                </div>
             </div>
-            <!-- begin modal-->
-            <s:iterator value="tucaoAdminDtos" id="t">
-                <div id="modallike<s:property value="#t.tid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h4 class="modal-title">喜欢列表</h4>
-                            </div>
-                            <div class="modal-body">
-                                <s:iterator value="#t.like" id="l">
-                                    <s:property value="#l.name"/>
-                                </s:iterator>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="modalcomment<s:property value="#t.tid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h4 class="modal-title">评论列表</h4>
-                            </div>
-                            <div class="modal-body">
-                                <s:iterator value="#t.comments" id="c">
-                                    <table class="table table-striped table-hovor">
-                                        <tr>
-                                            <td><s:property value="#c.cid"/></td>
-                                            <td><s:property value="#c.content"/></td>
-                                        </tr>
-                                    </table>
-                                </s:iterator>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </s:iterator>
-            <!--end modal-->
+            <table class="table table-striped table-hover" id="askTable">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>用户</th>
+                    <th>内容</th>
+                    <th>时间</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <s:iterator value="askAdminDto.answerAdminDtos" id="a">
+                    <tr>
+                        <td><s:property value="#a.ansid"/></td>
+                        <td><img class="avatar" src="../avatar/<s:property value="#a.avatar"/>" width="30px">
+                            <s:property value="#a.name"/>(<s:property value="#a.uid"/>)
+                        </td>
+                        <td><s:property value="#a.content"/></td>
+                        <td><s:property value="#a.time"/></td>
+                        <td>
+                            <button class="btn red btn-outline">删除</button>
+                        </td>
+                    </tr>
+                </s:iterator>
+                </tbody>
+            </table>
             <!-- END PAGE BASE CONTENT -->
         </div>
         <!-- BEGIN FOOTER -->
@@ -255,15 +235,15 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script>
     $(document).ready(function () {
-        $('#tucaoTable').DataTable({
+        $('#askTable').DataTable({
             "order": [[0, "desc"]],
             "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
             "buttons": [
-                { extend: 'print', className: 'btn dark btn-outline' },
-                { extend: 'pdf', className: 'btn green btn-outline' },
-                { extend: 'csv', className: 'btn purple btn-outline ' },
+                {extend: 'print', className: 'btn dark btn-outline'},
+                {extend: 'pdf', className: 'btn green btn-outline'},
+                {extend: 'csv', className: 'btn purple btn-outline '},
             ],
-            "pageLength":50,
+            "pageLength": 50,
             language: {
                 "processing": "处理中...",
                 "lengthMenu": "显示 _MENU_ 项结果",

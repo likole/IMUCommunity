@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>吐槽管理 | IMUCommunity</title>
+    <title>咨询管理 | IMUCommunity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN LAYOUT FIRST STYLES -->
@@ -87,11 +87,11 @@
                                     <a href="user">
                                         <i class="icon-graph"></i> 用户管理 </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="tucao">
                                         <i class="icon-bar-chart"></i> 吐槽管理 </a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="ask">
                                         <i class="icon-bulb"></i> 咨询管理 </a>
                                 </li>
@@ -133,7 +133,7 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>吐槽管理</h1>
+                <h1>咨询管理</h1>
                 <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                 <!--<a href="#">Home</a>-->
@@ -147,76 +147,31 @@
             <!-- END BREADCRUMBS -->
             <!-- BEGIN PAGE BASE CONTENT -->
             <div class="content">
-                <table class="table table-striped table-hover" id="tucaoTable">
+                <table class="table table-striped table-hover" id="askTable">
                     <thead>
                     <tr>
                         <th>编号</th>
-                        <th>时间</th>
+                        <th>问题</th>
+                        <th>描述</th>
                         <th>用户</th>
-                        <th>内容</th>
-                        <th>喜欢/评论</th>
-                        <th>删除</th>
+                        <th>时间</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <s:iterator value="tucaoAdminDtos" id="t">
+                    <s:iterator value="askAdminDtos" id="a">
                         <tr>
-                            <td><s:property value="#t.tid"/></td>
-                            <td><s:property value="#t.time"/></td>
-                            <td><s:property value="#t.name"/></td>
-                            <td><s:property value="#t.content"/></td>
-                            <td><a  data-toggle="modal" href="#modallike<s:property value="#t.tid"/>"><s:property value="#t.like_num"/></a>/<a  data-toggle="modal" href="#modalcomment<s:property value="#t.tid"/>"><s:property value="#t.comment_num"/></a></td>
-                            <td><button class="btn btn-outline red-mint uppercase" data-toggle="confirmation">删除</button></td>
+                            <td><s:property value="#a.aid"/></td>
+                            <td><s:property value="#a.title"/></td>
+                            <td><s:property value="#a.detail"/></td>
+                            <td><img class="avatar" src="../avatar/<s:property value="#a.avatar"/>" width="30px"> <s:property value="#a.name"/>(<s:property value="#a.uid"/>)</td>
+                            <td><s:property value="#a.time"/></td>
+                            <td><a class="btn red btn-outline" href="ask_detail?aid=<s:property value="#a.aid"/>">详情</a> </td>
                         </tr>
                     </s:iterator>
                     </tbody>
                 </table>
             </div>
-            <!-- begin modal-->
-            <s:iterator value="tucaoAdminDtos" id="t">
-                <div id="modallike<s:property value="#t.tid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h4 class="modal-title">喜欢列表</h4>
-                            </div>
-                            <div class="modal-body">
-                                <s:iterator value="#t.like" id="l">
-                                    <s:property value="#l.name"/>
-                                </s:iterator>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="modalcomment<s:property value="#t.tid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h4 class="modal-title">评论列表</h4>
-                            </div>
-                            <div class="modal-body">
-                                <s:iterator value="#t.comments" id="c">
-                                    <table class="table table-striped table-hovor">
-                                        <tr>
-                                            <td><s:property value="#c.cid"/></td>
-                                            <td><s:property value="#c.content"/></td>
-                                        </tr>
-                                    </table>
-                                </s:iterator>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </s:iterator>
-            <!--end modal-->
             <!-- END PAGE BASE CONTENT -->
         </div>
         <!-- BEGIN FOOTER -->
@@ -255,7 +210,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script>
     $(document).ready(function () {
-        $('#tucaoTable').DataTable({
+        $('#askTable').DataTable({
             "order": [[0, "desc"]],
             "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
             "buttons": [

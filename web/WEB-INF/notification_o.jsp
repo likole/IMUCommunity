@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>吐槽管理 | IMUCommunity</title>
+    <title>通知管理 | IMUCommunity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN LAYOUT FIRST STYLES -->
@@ -83,11 +83,11 @@
                             <a href="javascript:;" class="text-uppercase">
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
-                                <li>
+                                <li class="active">
                                     <a href="user">
                                         <i class="icon-graph"></i> 用户管理 </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="tucao">
                                         <i class="icon-bar-chart"></i> 吐槽管理 </a>
                                 </li>
@@ -133,7 +133,11 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>吐槽管理</h1>
+                <h1>通知管理-<s:property value="officialAccount.name"/>(<s:property value="officialAccount.oid"/>) </h1>
+                <button class="btn default m-icon" onclick="history.go(-1);">
+                    <i class="m-icon-swapleft"></i>
+                    返回
+                </button>
                 <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                 <!--<a href="#">Home</a>-->
@@ -147,76 +151,35 @@
             <!-- END BREADCRUMBS -->
             <!-- BEGIN PAGE BASE CONTENT -->
             <div class="content">
-                <table class="table table-striped table-hover" id="tucaoTable">
+                <table class="table table-striped table-hover" id="notificationTable">
                     <thead>
                     <tr>
                         <th>编号</th>
-                        <th>时间</th>
-                        <th>用户</th>
                         <th>内容</th>
-                        <th>喜欢/评论</th>
-                        <th>删除</th>
+                        <th>时间</th>
+                        <th>置顶</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <s:iterator value="tucaoAdminDtos" id="t">
-                        <tr>
-                            <td><s:property value="#t.tid"/></td>
-                            <td><s:property value="#t.time"/></td>
-                            <td><s:property value="#t.name"/></td>
-                            <td><s:property value="#t.content"/></td>
-                            <td><a  data-toggle="modal" href="#modallike<s:property value="#t.tid"/>"><s:property value="#t.like_num"/></a>/<a  data-toggle="modal" href="#modalcomment<s:property value="#t.tid"/>"><s:property value="#t.comment_num"/></a></td>
-                            <td><button class="btn btn-outline red-mint uppercase" data-toggle="confirmation">删除</button></td>
+                    <s:iterator value="notifications" id="n">
+                        <tr class=" <s:if test="#n.important==1">danger</s:if> ">
+                            <td><s:property value="#n.nid"/></td>
+                            <td><s:property value="#n.content"/></td>
+                            <td><s:property value="#n.time"/></td>
+                            <td><s:if test="#n.stick==1">
+                                <span class="font-red-thunderbird glyphicon glyphicon-ok"/>
+                            </s:if></td>
+                            <td> <s:if test="#n.stick==1">
+                                <a class="btn dark btn-outline sbold uppercase">取消置顶</a>
+                            </s:if><s:else>
+                                <a class="btn red btn-outline sbold uppercase">置顶</a>
+                            </s:else></td>
                         </tr>
                     </s:iterator>
                     </tbody>
                 </table>
             </div>
-            <!-- begin modal-->
-            <s:iterator value="tucaoAdminDtos" id="t">
-                <div id="modallike<s:property value="#t.tid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h4 class="modal-title">喜欢列表</h4>
-                            </div>
-                            <div class="modal-body">
-                                <s:iterator value="#t.like" id="l">
-                                    <s:property value="#l.name"/>
-                                </s:iterator>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="modalcomment<s:property value="#t.tid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h4 class="modal-title">评论列表</h4>
-                            </div>
-                            <div class="modal-body">
-                                <s:iterator value="#t.comments" id="c">
-                                    <table class="table table-striped table-hovor">
-                                        <tr>
-                                            <td><s:property value="#c.cid"/></td>
-                                            <td><s:property value="#c.content"/></td>
-                                        </tr>
-                                    </table>
-                                </s:iterator>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </s:iterator>
-            <!--end modal-->
             <!-- END PAGE BASE CONTENT -->
         </div>
         <!-- BEGIN FOOTER -->
@@ -255,8 +218,8 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script>
     $(document).ready(function () {
-        $('#tucaoTable').DataTable({
-            "order": [[0, "desc"]],
+        $('#notificationTable').DataTable({
+            "order": [[3, "desc"]],
             "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
             "buttons": [
                 { extend: 'print', className: 'btn dark btn-outline' },

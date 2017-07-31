@@ -32,6 +32,18 @@
         <action name="user" class="cn.likole.IMUCommunity.controller.AdminController" method="user">
             <result>/WEB-INF/user.jsp</result>
         </action>
+        <action name="ask" class="cn.likole.IMUCommunity.controller.AdminController" method="ask">
+            <result>/WEB-INF/ask.jsp</result>
+        </action>
+        <action name="ask_detail" class="cn.likole.IMUCommunity.controller.AdminController" method="ask_detail">
+            <result>/WEB-INF/ask_detail.jsp</result>
+        </action>
+        <action name="notification" class="cn.likole.IMUCommunity.controller.AdminController" method="notification">
+            <result>/WEB-INF/notification.jsp</result>
+        </action>
+        <action name="notification_o" class="cn.likole.IMUCommunity.controller.AdminController" method="notification_o">
+            <result>/WEB-INF/notification_o.jsp</result>
+        </action>
     </package>
     <package name="default" extends="json-default" namespace="/">
         <default-action-ref name="404"/>
