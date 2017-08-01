@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>官方帐号管理 | IMUCommunity</title>
+    <title>运行状态 | IMUCommunity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN LAYOUT FIRST STYLES -->
@@ -77,7 +77,7 @@
                 <!-- BEGIN HEADER MENU -->
                 <div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown dropdown-fw active open">
+                        <li class="dropdown dropdown-fw">
                             <a href="javascript:;" class="text-uppercase">
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
@@ -86,7 +86,7 @@
                                         <i class="icon-graph"></i> 总览 </a>
                                 </li>
                                 <li>
-                                    <a href="user">
+                                    <a>
                                         <i class="icon-user"></i> 用户管理 </a>
                                 </li>
                                 <li>
@@ -97,12 +97,12 @@
                                     <a href="ask">
                                         <i class="icon-directions"></i> 咨询管理 </a>
                                 </li>
-                                <li class="dropdown more-dropdown-sub active" >
+                                <li class="dropdown more-dropdown-sub">
                                     <a>
                                         <i class="icon-info"></i> 通知管理 </a>
                                     <ul class="dropdown-menu">
-                                        <li class="active">
-                                            <a>
+                                        <li>
+                                            <a href="office">
                                                 <i class="icon-briefcase"></i> 官方帐号管理 </a>
                                         </li>
                                         <li>
@@ -113,11 +113,11 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-fw">
+                        <li class="dropdown dropdown-fw active open">
                             <a href="javascript:;" class="text-uppercase">
                                 <i class="icon-home"></i> 系统管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
-                                <li>
+                                <li class="active">
                                     <a href="status">
                                         <i class="icon-bar-chart"></i> 运行状态 </a>
                                 </li>
@@ -137,7 +137,7 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>官方帐号</h1>
+                <h1>运行状态</h1>
                 <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                 <!--<a href="#">Home</a>-->
@@ -150,80 +150,23 @@
             </div>
             <!-- END BREADCRUMBS -->
             <!-- BEGIN PAGE BASE CONTENT -->
-            <div class="content">
-                <table class="table table-striped table-hover" id="officeTable">
-                    <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>名称</th>
-                        <th>种类</th>
-                        <th>描述</th>
-                        <th>token</th>
-                        <th>编辑</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <s:iterator value="officialAccounts" id="o">
-                        <tr>
-                            <td><s:property value="#o.oid"/></td>
-                            <td><s:property value="#o.name"/></td>
-                            <td><s:property value="#o.type"/></td>
-                            <td><s:property value="#o.description"/></td>
-                            <td><s:property value="#o.token"/></td>
-                            <td>
-                                <a class="btn red btn-outline" data-toggle="modal" href="#modal<s:property value="#o.oid"/>">编辑</a>
-                            </td>
-                        </tr>
-                    </s:iterator>
-                    </tbody>
-                </table>
-            </div>
-            <%--begin modal--%>
-            <s:iterator value="officialAccounts" id="o">
-            <div id="modal<s:property value="#o.oid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">编辑</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form role="form" action="office_edit">
-                                <input type="hidden" name="oid" value="<s:property value="#o.oid"/>"/>
-                                <div class="form-body">
-                                    <div class="form-group">
-                                        <label>名称</label>
-                                            <input name="name" type="text" class="form-control" placeholder="名称" value="<s:property value="#o.name"/>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>种类</label>
-                                            <input name="type" type="text" class="form-control" placeholder="种类" value="<s:property value="#o.type"/>">
-                                    </div>
-                                    <div class="note note-info">
-                                        0.组织
-                                        1.社团
-                                        2.学校
-                                        3.学院
-                                        4.班级
-                                    </div>
-                                    <div class="form-group">
-                                        <label>描述</label>
-                                            <input name="description" type="text" class="form-control" placeholder="描述" value="<s:property value="#o.description"/>">
-                                    </div>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn blue btn-block">提交</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
-                        </div>
+            <form action="status_change">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="control-label">启用站点</label>
+                        <input type="checkbox"
+                        <s:if test="open==1"> checked</s:if> class="make-switch" name="open">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">允许跨域请求</label>
+                        <input type="checkbox"
+                        <s:if test="allow==1"> checked</s:if> class="make-switch" name="allow">
                     </div>
                 </div>
-            </div>
-            </s:iterator>
-            <%--end modal--%>
+                <div class="form-actions">
+                    <button type="submit" class="btn blue">确认修改（慎重操作）</button>
+                </div>
+            </form>
             <!-- END PAGE BASE CONTENT -->
         </div>
         <!-- BEGIN FOOTER -->
@@ -251,53 +194,11 @@
 <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
-        type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script>
-    $(document).ready(function () {
-        $('#officeTable').DataTable({
-            "order": [[0, "desc"]],
-            "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
-            "buttons": [
-                { extend: 'print', className: 'btn dark btn-outline' },
-                { extend: 'pdf', className: 'btn green btn-outline' },
-                { extend: 'csv', className: 'btn purple btn-outline ' },
-            ],
-            "pageLength":50,
-            language: {
-                "processing": "处理中...",
-                "lengthMenu": "显示 _MENU_ 项结果",
-                "zeroRecords": "没有匹配结果",
-                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "infoFiltered": "(由 _MAX_ 项结果过滤)",
-                "infoPostFix": "",
-                "search": "搜索:",
-                "url": "",
-                "emptyTable": "表中数据为空",
-                "loadingRecords": "载入中...",
-                "infoThousands": ",",
-                "paginate": {
-                    "first": "首页",
-                    "previous": "上页",
-                    "next": "下页",
-                    "last": "末页"
-                },
-                "aria": {
-                    "sortAscending": ": 以升序排列此列",
-                    "sortDescending": ": 以降序排列此列"
-                }
-            }
-        });
-    });
-</script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="../assets/layouts/layout5/scripts/layout.min.js" type="text/javascript"></script>

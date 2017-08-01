@@ -68,10 +68,10 @@
                     <!-- BEGIN TOPBAR ACTIONS -->
                     <div class="topbar-actions">
                         <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                        <button type="button" class="quick-sidebar-toggler" data-toggle="collapse">
+                        <a href="logout" class="btn btn-link quick-sidebar-toggler">
                             <span class="sr-only">Logout</span>
-                            <i class="icon-logout"></i>
-                        </button>
+                            <i class="icon icon-logout"></i>
+                        </a>
                         <!-- END QUICK SIDEBAR TOGGLER -->
                     </div>
                     <!-- END TOPBAR ACTIONS -->
@@ -120,16 +120,8 @@
                                 <i class="icon-home"></i> 系统管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
                                 <li>
-                                    <a href="index.html">
-                                        <i class="icon-bar-chart"></i> Default </a>
-                                </li>
-                                <li>
-                                    <a href="dashboard_2.html">
-                                        <i class="icon-bulb"></i> Dashboard 2 </a>
-                                </li>
-                                <li>
-                                    <a href="dashboard_3.html">
-                                        <i class="icon-graph"></i> Dashboard 3 </a>
+                                    <a href="status">
+                                        <i class="icon-bar-chart"></i> 运行状态 </a>
                                 </li>
                             </ul>
                         </li>

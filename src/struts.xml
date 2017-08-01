@@ -59,6 +59,13 @@
         <action name="office_edit" class="cn.likole.IMUCommunity.controller.AdminController" method="office_edit">
             <result type="redirectAction">office</result>
         </action>
+        <!--系统管理-->
+        <action name="status" class="cn.likole.IMUCommunity.controller.AdminController" method="status">
+            <result>/WEB-INF/status.jsp</result>
+        </action>
+        <action name="status_change" class="cn.likole.IMUCommunity.controller.AdminController" method="status_change">
+            <result type="redirectAction">status</result>
+        </action>
         <!--登陆-->
         <action name="login" class="cn.likole.IMUCommunity.controller.AdminController" method="login">
             <result type="redirectAction">
@@ -67,6 +74,9 @@
             <result name="input">
                 /WEB-INF/login.jsp
             </result>
+        </action>
+        <action name="logout" class="cn.likole.IMUCommunity.controller.AdminController" method="logout">
+            <result type="redirectAction">login</result>
         </action>
     </package>
     <package name="default" extends="json-default" namespace="/">

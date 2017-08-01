@@ -12,7 +12,9 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by likole on 7/28/17.
@@ -36,6 +38,26 @@ public class AdminController extends ActionSupport {
     String name;
     int type;
     String description;
+    String open;
+    String allow;
+    @Autowired
+    AdminService adminService;
+
+    public String getAllow() {
+        return allow;
+    }
+
+    public void setAllow(String allow) {
+        this.allow = allow;
+    }
+
+    public String getOpen() {
+        return open;
+    }
+
+    public void setOpen(String open) {
+        this.open = open;
+    }
 
     public String getName() {
         return name;
@@ -173,9 +195,6 @@ public class AdminController extends ActionSupport {
         this.password = password;
     }
 
-    @Autowired
-    AdminService adminService;
-
     public String login(){
         HttpSession session=ServletActionContext.getRequest().getSession();
 
@@ -252,6 +271,47 @@ public class AdminController extends ActionSupport {
 
     public String office_edit(){
         adminService.officeEdit(oid,name,type,description);
+        return SUCCESS;
+    }
+
+    public String status() throws IOException {
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(ServletActionContext.getServletContext().getRealPath("/WEB-INF/config.properties")), "utf-8");
+
+        Properties properties = new Properties();
+        properties.load(inputStreamReader);
+
+        open = properties.getProperty("enable_site");
+        allow = properties.getProperty("allow_origin");
+
+        return SUCCESS;
+    }
+
+    public String status_change() throws IOException {
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(ServletActionContext.getServletContext().getRealPath("/WEB-INF/config.properties")), "utf-8");
+
+        Properties properties = new Properties();
+        properties.load(inputStreamReader);
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ServletActionContext.getServletContext().getRealPath("/WEB-INF/config.properties")), "utf-8"));
+
+        properties.clear();
+        if ("on".equals(open))
+            properties.setProperty("enable_site", "1");
+        else
+            properties.setProperty("enable_site", "0");
+
+        if ("on".equals(allow))
+            properties.setProperty("allow_origin", "1");
+        else
+            properties.setProperty("allow_origin", "0");
+
+        properties.store(bufferedWriter, "");
+        return SUCCESS;
+    }
+
+    public String logout() {
+        HttpSession httpSession = ServletActionContext.getRequest().getSession();
+        httpSession.removeAttribute("login");
         return SUCCESS;
     }
 }
