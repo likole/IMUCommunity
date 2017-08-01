@@ -30,4 +30,14 @@ public class NotificationDao extends HibernateDaoSupport{
     public void save(Notification notification){
         getHibernateTemplate().save(notification);
     }
+
+    public Notification getByNid(int nid){
+       List<Notification> notificationList= (List<Notification>) getHibernateTemplate().find("from Notification where nid=?",nid);
+       if(notificationList.size()>0)return notificationList.get(0);
+       return null;
+    }
+
+    public int getNum(){
+        return ((Long)getHibernateTemplate().iterate("select count(*) from Notification ").next()).intValue();
+    }
 }

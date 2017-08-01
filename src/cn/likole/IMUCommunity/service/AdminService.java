@@ -54,7 +54,9 @@ public class AdminService {
             tucaoAdminDto.setContent(tucao.getContent());
             tucaoAdminDto.setLike_num(tucao.getLikeNum());
             //耗时操作
-            tucaoAdminDto.setName(userDao.getByUid(tucao.getUid()).getName());
+            User user=userDao.getByUid(tucao.getUid());
+            tucaoAdminDto.setName(user.getName());
+            tucaoAdminDto.setAvatar(user.getAvatar());
             tucaoAdminDto.setTid(tucao.getTid());
             tucaoAdminDto.setUid(tucao.getUid());
             tucaoAdminDto.setTime(simpleDateFormat.format(tucao.getTime()));
@@ -79,6 +81,14 @@ public class AdminService {
         return tucaoAdminDtos;
     }
 
+
+    /**
+     * 删除吐槽
+     * @param tid
+     */
+    public void delTucao(int tid){
+        tucaoDao.delete(tid);
+    }
 
     /**
      * 用户列表
@@ -137,6 +147,13 @@ public class AdminService {
         return askAdminDtos;
     }
 
+    /**
+     * 删除咨询
+     * @param aid
+     */
+    public void delAsk(int aid){
+        askDao.delete(aid);
+    }
 
     /**
      * 咨询详情
@@ -234,7 +251,61 @@ public class AdminService {
         return notificationDtos;
     }
 
+    /**
+     * 置顶/取消置顶
+     * @param nid
+     */
+    public void notificationStick(int nid){
+        Notification notification= notificationDao.getByNid(nid);
+        notification.setStick((notification.getStick()&0xFF)==1?(byte)0:(byte)1);
+    }
+
+    /**
+     * 获取官方帐号信息
+     * @param oid
+     * @return
+     */
     public OfficialAccount getNameByOid(int oid){
         return officialAccountDao.get(oid);
+    }
+
+
+    /**
+     * 总览
+     * @return
+     */
+    public DashDto dash(){
+        DashDto dashDto=new DashDto();
+        dashDto.setUser_num(userDao.getNum());
+        dashDto.setTucao_num(tucaoDao.getNum());
+        dashDto.setLike_num(likesDao.getNum());
+        dashDto.setComment_num(commentsDao.getNum());
+        dashDto.setAsk_num(askDao.getNum());
+        dashDto.setAnswer_num(answerDao.getNum());
+        dashDto.setOffice_num(officialAccountDao.getNum());
+        dashDto.setNotification_num(notificationDao.getNum());
+        return dashDto;
+    }
+
+    /**
+     * 获取官方帐号列表
+     * @return
+     */
+    public List<OfficialAccount> getOfficialAccounts(){
+        return officialAccountDao.getList();
+    }
+
+    /**
+     * 编辑官方帐号
+     * @param oid
+     * @param name
+     * @param type
+     * @param description
+     */
+    public void officeEdit(int oid,String name,int type,String description){
+        OfficialAccount officialAccount=officialAccountDao.get(oid);
+        officialAccount.setName(name);
+        officialAccount.setType(type);
+        officialAccount.setDescription(description);
     }
 }

@@ -29,4 +29,8 @@ public class CommentsDao extends HibernateDaoSupport{
     public void save(Comments comments){
         getHibernateTemplate().save(comments);
     }
+
+    public int getNum(){
+        return ((Long)getHibernateTemplate().iterate("select count(*) from Comments ").next()).intValue();
+    }
 }

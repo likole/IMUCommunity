@@ -84,20 +84,34 @@
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
                                 <li>
-                                    <a href="user">
-                                        <i class="icon-graph"></i> 用户管理 </a>
+                                    <a href="dash">
+                                        <i class="icon-graph"></i> 总览 </a>
                                 </li>
-                                <li class="active">
-                                    <a href="tucao">
-                                        <i class="icon-bar-chart"></i> 吐槽管理 </a>
+                                <li>
+                                    <a href="user">
+                                        <i class="icon-user"></i> 用户管理 </a>
+                                </li>
+                                <li   class="active">
+                                    <a>
+                                        <i class="icon-bubble"></i> 吐槽管理 </a>
                                 </li>
                                 <li>
                                     <a href="ask">
-                                        <i class="icon-bulb"></i> 咨询管理 </a>
+                                        <i class="icon-directions"></i> 咨询管理 </a>
                                 </li>
-                                <li>
-                                    <a href="notification">
-                                        <i class="icon-graph"></i> 通知管理 </a>
+                                <li class="dropdown more-dropdown-sub" >
+                                    <a>
+                                        <i class="icon-info"></i> 通知管理 </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="office">
+                                                <i class="icon-briefcase"></i> 官方帐号管理 </a>
+                                        </li>
+                                        <li>
+                                            <a href="notification">
+                                                <i class="icon-info"></i> 通知管理 </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -163,10 +177,12 @@
                         <tr>
                             <td><s:property value="#t.tid"/></td>
                             <td><s:property value="#t.time"/></td>
-                            <td><s:property value="#t.name"/></td>
+                            <td><a onclick="$.searchTable('<s:property value="#t.name"/>')"> <img class="avatar" src="../avatar/<s:property value="#t.avatar"/>" width="30px"><s:property value="#t.name"/>(<s:property value="#t.uid" />)</a></td>
                             <td><s:property value="#t.content"/></td>
                             <td><a  data-toggle="modal" href="#modallike<s:property value="#t.tid"/>"><s:property value="#t.like_num"/></a>/<a  data-toggle="modal" href="#modalcomment<s:property value="#t.tid"/>"><s:property value="#t.comment_num"/></a></td>
-                            <td><button class="btn btn-outline red-mint uppercase" data-toggle="confirmation">删除</button></td>
+                            <td>
+                                <a class="btn red btn-outline" data-btnOkClass="btn btn-danger" data-btn-ok-label="确认删除" data-btn-cancel-label="取消" data-btnCancelClass="btn btn-info" data-toggle="confirmation" data-href="tucao_delete?tid=<s:property value="#t.tid"/>" data-title="确认删除？">删除</a>
+                            </td>
                         </tr>
                     </s:iterator>
                     </tbody>
@@ -217,6 +233,9 @@
                 </div>
             </s:iterator>
             <!--end modal-->
+            <button class="btn default m-icon" id="cancelBtn" style="display: none" onclick="$.cancelSearch()">
+                取消过滤
+            </button>
             <!-- END PAGE BASE CONTENT -->
         </div>
         <!-- BEGIN FOOTER -->
@@ -244,7 +263,8 @@
 <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
+<%--<script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>--%>
+<script src="../assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
         type="text/javascript"></script>
@@ -289,6 +309,16 @@
                 }
             }
         });
+
+        $.searchTable=function (key){
+            $('#tucaoTable').DataTable().column(2).search(key).draw();
+            $('#cancelBtn').css("display","block");
+        };
+
+        $.cancelSearch=function () {
+            $('#tucaoTable').DataTable().column(2).search('').draw();
+            $('#cancelBtn').css("display","none");
+        }
     });
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->

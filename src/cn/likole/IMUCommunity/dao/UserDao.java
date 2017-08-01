@@ -44,4 +44,8 @@ public class UserDao extends HibernateDaoSupport {
     public List<User> getAll(){
         return (List<User>) getHibernateTemplate().find("from User ");
     }
+
+    public int getNum(){
+        return ((Long)getHibernateTemplate().iterate("select count(*) from User ").next()).intValue();
+    }
 }

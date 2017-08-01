@@ -49,4 +49,7 @@ public class TucaoDao extends HibernateDaoSupport{
         getHibernateTemplate().bulkUpdate("delete from Tucao where tid=?",tid);
     }
 
+    public int getNum(){
+        return ((Long)getHibernateTemplate().iterate("select count(*) from Tucao ").next()).intValue();
+    }
 }

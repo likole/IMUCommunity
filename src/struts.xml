@@ -17,32 +17,56 @@
             <exception-mapping exception="java.sql.SQLException" result="500"/>
         </global-exception-mappings>
 
-        <action name="login" class="cn.likole.IMUCommunity.controller.AdminController" method="login">
-            <result name="input">
-                /WEB-INF/login.jsp
-            </result>
-            <result type="redirect">
-                tucao.action
-            </result>
+        <!--总览-->
+        <action name="dash" class="cn.likole.IMUCommunity.controller.AdminController" method="dash">
+            <result>/WEB-INF/dash.jsp</result>
         </action>
-
+        <!--吐槽管理-->
         <action name="tucao" class="cn.likole.IMUCommunity.controller.AdminController" method="tucao">
             <result>/WEB-INF/tucao.jsp</result>
         </action>
+        <action name="tucao_delete" class="cn.likole.IMUCommunity.controller.AdminController" method="tucao_delete">
+            <result type="redirectAction">tucao</result>
+        </action>
+        <!--用户管理-->
         <action name="user" class="cn.likole.IMUCommunity.controller.AdminController" method="user">
             <result>/WEB-INF/user.jsp</result>
         </action>
+        <!--咨询管理-->
         <action name="ask" class="cn.likole.IMUCommunity.controller.AdminController" method="ask">
             <result>/WEB-INF/ask.jsp</result>
+        </action>
+        <action name="ask_delete" class="cn.likole.IMUCommunity.controller.AdminController" method="ask_delete">
+            <result type="redirectAction">ask</result>
         </action>
         <action name="ask_detail" class="cn.likole.IMUCommunity.controller.AdminController" method="ask_detail">
             <result>/WEB-INF/ask_detail.jsp</result>
         </action>
+        <!--通知管理-->
         <action name="notification" class="cn.likole.IMUCommunity.controller.AdminController" method="notification">
             <result>/WEB-INF/notification.jsp</result>
         </action>
+        <action name="notification_stick" class="cn.likole.IMUCommunity.controller.AdminController" method="notification_stick">
+            <result type="redirectAction">notification</result>
+            <result type="redirectAction" name="o">notification_o?oid=${oid}</result>
+        </action>
         <action name="notification_o" class="cn.likole.IMUCommunity.controller.AdminController" method="notification_o">
             <result>/WEB-INF/notification_o.jsp</result>
+        </action>
+        <action name="office" class="cn.likole.IMUCommunity.controller.AdminController" method="office">
+            <result>/WEB-INF/office.jsp</result>
+        </action>
+        <action name="office_edit" class="cn.likole.IMUCommunity.controller.AdminController" method="office_edit">
+            <result type="redirectAction">office</result>
+        </action>
+        <!--登陆-->
+        <action name="login" class="cn.likole.IMUCommunity.controller.AdminController" method="login">
+            <result type="redirectAction">
+                dash
+            </result>
+            <result name="input">
+                /WEB-INF/login.jsp
+            </result>
         </action>
     </package>
     <package name="default" extends="json-default" namespace="/">

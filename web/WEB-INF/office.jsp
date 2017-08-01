@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>通知管理 | IMUCommunity</title>
+    <title>用户管理 | IMUCommunity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN LAYOUT FIRST STYLES -->
@@ -104,7 +104,7 @@
                                         <i class="icon-info"></i> 通知管理 </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="office">
+                                            <a>
                                                 <i class="icon-briefcase"></i> 官方帐号管理 </a>
                                         </li>
                                         <li class="active">
@@ -147,11 +147,7 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>通知管理-<s:property value="officialAccount.name"/>(<s:property value="officialAccount.oid"/>) </h1>
-                <a class="btn default m-icon" href="notification">
-                    <i class="m-icon-swapleft"></i>
-                    返回
-                </a>
+                <h1>官方帐号</h1>
                 <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                 <!--<a href="#">Home</a>-->
@@ -165,35 +161,79 @@
             <!-- END BREADCRUMBS -->
             <!-- BEGIN PAGE BASE CONTENT -->
             <div class="content">
-                <table class="table table-striped table-hover" id="notificationTable">
+                <table class="table table-striped table-hover" id="officeTable">
                     <thead>
                     <tr>
                         <th>编号</th>
-                        <th>内容</th>
-                        <th>时间</th>
-                        <th>置顶</th>
-                        <th>操作</th>
+                        <th>名称</th>
+                        <th>种类</th>
+                        <th>描述</th>
+                        <th>token</th>
+                        <th>编辑</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <s:iterator value="notifications" id="n">
-                        <tr class=" <s:if test="#n.important==1">danger</s:if> ">
-                            <td><s:property value="#n.nid"/></td>
-                            <td><s:property value="#n.content"/></td>
-                            <td><s:property value="#n.time"/></td>
-                            <td><s:if test="#n.stick==1">
-                                <span class="font-red-thunderbird glyphicon glyphicon-ok"/>
-                            </s:if></td>
-                            <td> <s:if test="#n.stick==1">
-                                <a class="btn dark btn-outline sbold uppercase" href="notification_stick?nid=<s:property value="#n.nid"/>&oid=<s:property value="officialAccount.oid"/>">取消置顶</a>
-                            </s:if><s:else>
-                                <a class="btn red btn-outline sbold uppercase" href="notification_stick?nid=<s:property value="#n.nid"/>&oid=<s:property value="officialAccount.oid"/>">置顶</a>
-                            </s:else></td>
+                    <s:iterator value="officialAccounts" id="o">
+                        <tr>
+                            <td><s:property value="#o.oid"/></td>
+                            <td><s:property value="#o.name"/></td>
+                            <td><s:property value="#o.type"/></td>
+                            <td><s:property value="#o.description"/></td>
+                            <td><s:property value="#o.token"/></td>
+                            <td>
+                                <a class="btn red btn-outline" data-toggle="modal" href="#modal<s:property value="#o.oid"/>">编辑</a>
+                            </td>
                         </tr>
                     </s:iterator>
                     </tbody>
                 </table>
             </div>
+            <%--begin modal--%>
+            <s:iterator value="officialAccounts" id="o">
+            <div id="modal<s:property value="#o.oid"/>" class="modal fade modal-scroll" tabindex="-1" data-replace="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">编辑</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" action="office_edit">
+                                <input type="hidden" name="oid" value="<s:property value="#o.oid"/>"/>
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label>名称</label>
+                                            <input name="name" type="text" class="form-control" placeholder="名称" value="<s:property value="#o.name"/>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>种类</label>
+                                            <input name="type" type="text" class="form-control" placeholder="种类" value="<s:property value="#o.type"/>">
+                                    </div>
+                                    <div class="note note-info">
+                                        0.组织
+                                        1.社团
+                                        2.学校
+                                        3.学院
+                                        4.班级
+                                    </div>
+                                    <div class="form-group">
+                                        <label>描述</label>
+                                            <input name="description" type="text" class="form-control" placeholder="描述" value="<s:property value="#o.description"/>">
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn blue btn-block">提交</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </s:iterator>
+            <%--end modal--%>
             <!-- END PAGE BASE CONTENT -->
         </div>
         <!-- BEGIN FOOTER -->
@@ -232,8 +272,8 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script>
     $(document).ready(function () {
-        $('#notificationTable').DataTable({
-            "order": [[3, "desc"]],
+        $('#officeTable').DataTable({
+            "order": [[0, "desc"]],
             "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
             "buttons": [
                 { extend: 'print', className: 'btn dark btn-outline' },

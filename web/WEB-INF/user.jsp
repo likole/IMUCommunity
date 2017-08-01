@@ -83,21 +83,35 @@
                             <a href="javascript:;" class="text-uppercase">
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
-                                <li class="active">
-                                    <a href="user">
-                                        <i class="icon-graph"></i> 用户管理 </a>
+                                <li>
+                                    <a href="dash">
+                                        <i class="icon-graph"></i> 总览 </a>
+                                </li>
+                                <li  class="active">
+                                    <a>
+                                        <i class="icon-user"></i> 用户管理 </a>
                                 </li>
                                 <li>
                                     <a href="tucao">
-                                        <i class="icon-bar-chart"></i> 吐槽管理 </a>
+                                        <i class="icon-bubble"></i> 吐槽管理 </a>
                                 </li>
                                 <li>
                                     <a href="ask">
-                                        <i class="icon-bulb"></i> 咨询管理 </a>
+                                        <i class="icon-directions"></i> 咨询管理 </a>
                                 </li>
-                                <li>
-                                    <a href="notification">
-                                        <i class="icon-graph"></i> 通知管理 </a>
+                                <li class="dropdown more-dropdown-sub" >
+                                    <a>
+                                        <i class="icon-info"></i> 通知管理 </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="office">
+                                                <i class="icon-briefcase"></i> 官方帐号管理 </a>
+                                        </li>
+                                        <li>
+                                            <a href="notification">
+                                                <i class="icon-info"></i> 通知管理 </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -163,19 +177,21 @@
                     <tbody>
                     <s:iterator value="users" id="u">
                         <tr>
-                            <td><img class="avatar" src="../avatar/<s:property value="#u.avatar"/>" width="30px"> </td>
+                            <td><img class="avatar popovers" data-html="true" data-container="body" data-trigger="hover" data-placement="right" data-content="<img src='../avatar/<s:property value="#u.avatar"/>' width=200px/>" data-original-title="用户头像" src="../avatar/<s:property value="#u.avatar"/>" width="30px"> </td>
                             <td><s:property value="#u.uid"/></td>
                             <td><s:property value="#u.name"/></td>
                             <td><s:property value="#u.password"/></td>
                             <td>
                                 <s:if test="#u.gender==1">
-                                    男
+                                    <span aria-hidden="true" class="icon-symbol-male font-blue"> 男</span>
                                 </s:if>
                                 <s:elseif test="#u.gender==2">
-                                    女
+                                    <span aria-hidden="true" class="icon-symbol-female font-red-mint"> 女</span>
                                 </s:elseif>
                                 <s:else>
-                                    其他
+                                    <span aria-hidden="true" class="icon-question font-default">
+                                        其他
+                                    </span>
                                 </s:else>
                             </td>
                             <td><s:property value="#u.sid"/></td>

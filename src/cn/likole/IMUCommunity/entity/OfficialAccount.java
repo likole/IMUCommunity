@@ -12,6 +12,7 @@ public class OfficialAccount {
     private String name;
     private int type;
     private String token;
+    private String description;
 
     @Id
     @Column(name = "oid")
@@ -73,5 +74,15 @@ public class OfficialAccount {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    @Basic
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -84,20 +84,34 @@
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
                                 <li>
+                                    <a href="dash">
+                                        <i class="icon-graph"></i> 总览 </a>
+                                </li>
+                                <li>
                                     <a href="user">
-                                        <i class="icon-graph"></i> 用户管理 </a>
+                                        <i class="icon-user"></i> 用户管理 </a>
                                 </li>
                                 <li>
                                     <a href="tucao">
-                                        <i class="icon-bar-chart"></i> 吐槽管理 </a>
+                                        <i class="icon-bubble"></i> 吐槽管理 </a>
                                 </li>
                                 <li class="active">
                                     <a href="ask">
-                                        <i class="icon-bulb"></i> 咨询管理 </a>
+                                        <i class="icon-directions"></i> 咨询管理 </a>
                                 </li>
-                                <li>
-                                    <a href="notification">
-                                        <i class="icon-graph"></i> 通知管理 </a>
+                                <li class="dropdown more-dropdown-sub" >
+                                    <a>
+                                        <i class="icon-info"></i> 通知管理 </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="office">
+                                                <i class="icon-briefcase"></i> 官方帐号管理 </a>
+                                        </li>
+                                        <li>
+                                            <a href="notification">
+                                                <i class="icon-info"></i> 通知管理 </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -191,7 +205,7 @@
                         <td><s:property value="#a.content"/></td>
                         <td><s:property value="#a.time"/></td>
                         <td>
-                            <button class="btn red btn-outline">删除</button>
+                            <button class="btn red disabled">删除</button>
                         </td>
                     </tr>
                 </s:iterator>

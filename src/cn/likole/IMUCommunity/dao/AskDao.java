@@ -43,4 +43,8 @@ public class AskDao extends HibernateDaoSupport{
         List<Ask> list= (List<Ask>) getHibernateTemplate().find("from Ask where title like ? or detail like  ?",'%'+key+'%','%'+key+'%');
         return list;
     }
+
+    public int getNum(){
+        return ((Long)getHibernateTemplate().iterate("select count(*) from Ask ").next()).intValue();
+    }
 }

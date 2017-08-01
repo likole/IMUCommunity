@@ -84,20 +84,34 @@
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
                                 <li>
+                                    <a href="dash">
+                                        <i class="icon-graph"></i> 总览 </a>
+                                </li>
+                                <li>
                                     <a href="user">
-                                        <i class="icon-graph"></i> 用户管理 </a>
+                                        <i class="icon-user"></i> 用户管理 </a>
                                 </li>
                                 <li>
                                     <a href="tucao">
-                                        <i class="icon-bar-chart"></i> 吐槽管理 </a>
+                                        <i class="icon-bubble"></i> 吐槽管理 </a>
                                 </li>
                                 <li class="active">
-                                    <a href="ask">
-                                        <i class="icon-bulb"></i> 咨询管理 </a>
+                                    <a>
+                                        <i class="icon-directions"></i> 咨询管理 </a>
                                 </li>
-                                <li>
-                                    <a href="notification">
-                                        <i class="icon-graph"></i> 通知管理 </a>
+                                <li class="dropdown more-dropdown-sub" >
+                                    <a>
+                                        <i class="icon-info"></i> 通知管理 </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="office">
+                                                <i class="icon-briefcase"></i> 官方帐号管理 </a>
+                                        </li>
+                                        <li>
+                                            <a href="notification">
+                                                <i class="icon-info"></i> 通知管理 </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -166,7 +180,10 @@
                             <td><s:property value="#a.detail"/></td>
                             <td><img class="avatar" src="../avatar/<s:property value="#a.avatar"/>" width="30px"> <s:property value="#a.name"/>(<s:property value="#a.uid"/>)</td>
                             <td><s:property value="#a.time"/></td>
-                            <td><a class="btn red btn-outline" href="ask_detail?aid=<s:property value="#a.aid"/>">详情</a> </td>
+                            <td>
+                                <a class="btn blue btn-outline" href="ask_detail?aid=<s:property value="#a.aid"/>">详情</a>
+                                <a class="btn red btn-outline" data-placement="top" data-btnOkClass="btn btn-danger" data-btn-ok-label="确认删除" data-btn-cancel-label="取消" data-btnCancelClass="btn btn-info" data-toggle="confirmation" data-href="ask_delete?aid=<s:property value="#a.aid"/>" data-title="确认删除？">删除</a>
+                            </td>
                         </tr>
                     </s:iterator>
                     </tbody>
@@ -203,6 +220,7 @@
 <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
         type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>

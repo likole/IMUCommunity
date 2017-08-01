@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>通知管理 | IMUCommunity</title>
+    <title>总览 | IMUCommunity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN LAYOUT FIRST STYLES -->
@@ -83,8 +83,8 @@
                             <a href="javascript:;" class="text-uppercase">
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
-                                <li>
-                                    <a href="dash">
+                                <li class="active">
+                                    <a>
                                         <i class="icon-graph"></i> 总览 </a>
                                 </li>
                                 <li>
@@ -99,7 +99,7 @@
                                     <a href="ask">
                                         <i class="icon-directions"></i> 咨询管理 </a>
                                 </li>
-                                <li class="dropdown more-dropdown-sub active" >
+                                <li class="dropdown more-dropdown-sub" >
                                     <a>
                                         <i class="icon-info"></i> 通知管理 </a>
                                     <ul class="dropdown-menu">
@@ -107,7 +107,7 @@
                                             <a href="office">
                                                 <i class="icon-briefcase"></i> 官方帐号管理 </a>
                                         </li>
-                                        <li class="active">
+                                        <li>
                                             <a href="notification">
                                                 <i class="icon-info"></i> 通知管理 </a>
                                         </li>
@@ -147,11 +147,7 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>通知管理-<s:property value="officialAccount.name"/>(<s:property value="officialAccount.oid"/>) </h1>
-                <a class="btn default m-icon" href="notification">
-                    <i class="m-icon-swapleft"></i>
-                    返回
-                </a>
+                <h1>总览</h1>
                 <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                 <!--<a href="#">Home</a>-->
@@ -164,35 +160,86 @@
             </div>
             <!-- END BREADCRUMBS -->
             <!-- BEGIN PAGE BASE CONTENT -->
-            <div class="content">
-                <table class="table table-striped table-hover" id="notificationTable">
-                    <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>内容</th>
-                        <th>时间</th>
-                        <th>置顶</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <s:iterator value="notifications" id="n">
-                        <tr class=" <s:if test="#n.important==1">danger</s:if> ">
-                            <td><s:property value="#n.nid"/></td>
-                            <td><s:property value="#n.content"/></td>
-                            <td><s:property value="#n.time"/></td>
-                            <td><s:if test="#n.stick==1">
-                                <span class="font-red-thunderbird glyphicon glyphicon-ok"/>
-                            </s:if></td>
-                            <td> <s:if test="#n.stick==1">
-                                <a class="btn dark btn-outline sbold uppercase" href="notification_stick?nid=<s:property value="#n.nid"/>&oid=<s:property value="officialAccount.oid"/>">取消置顶</a>
-                            </s:if><s:else>
-                                <a class="btn red btn-outline sbold uppercase" href="notification_stick?nid=<s:property value="#n.nid"/>&oid=<s:property value="officialAccount.oid"/>">置顶</a>
-                            </s:else></td>
-                        </tr>
-                    </s:iterator>
-                    </tbody>
-                </table>
+            <!-- begin dash board-->
+            <div class="row widget-row">
+                <div class="col-md-3">
+                    <!-- BEGIN WIDGET THUMB -->
+                    <a href="user" style="text-decoration: none">
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading">用户管理</h4>
+                        <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-green  icon-user"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle">用户数量</span>
+                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="<s:property value="dashDto.user_num" />"><s:property value="dashDto.user_num" /></span>
+                            </div>
+                        </div>
+                    </div></a>
+                    <!-- END WIDGET THUMB -->
+                </div>
+                <div class="col-md-3">
+                    <!-- BEGIN WIDGET THUMB -->
+                    <a href="tucao"  style="text-decoration: none">
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading">吐槽管理</h4>
+                        <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-red  icon-bubble"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle">吐槽数量/喜欢数量/评论数量</span>
+                                <span class="widget-thumb-body-stat">
+                                    <span data-counter="counterup" data-value="<s:property value="dashDto.tucao_num" />"><s:property value="dashDto.tucao_num" /></span> /
+                                    <span data-counter="counterup" data-value="<s:property value="dashDto.like_num" />"><s:property value="dashDto.like_num" />3</span> /
+                                   <span data-counter="counterup" data-value="<s:property value="dashDto.comment_num" />"><s:property value="dashDto.comment_num" /></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- END WIDGET THUMB --></a>
+                </div>
+                <div class="col-md-3">
+                    <!-- BEGIN WIDGET THUMB -->
+                    <a href="ask" style="text-decoration: none">
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading">咨询管理</h4>
+                        <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-purple icon-directions"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle">咨询数量/回答数量</span>
+                                <span class="widget-thumb-body-stat">
+                                    <span data-counter="counterup" data-value="<s:property value="dashDto.ask_num" />"><s:property value="dashDto.ask_num" /></span> /
+                                   <span data-counter="counterup" data-value="<s:property value="dashDto.answer_num" />"><s:property value="dashDto.answer_num" /></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- END WIDGET THUMB --></a>
+                </div>
+                <div class="col-md-3">
+                    <!-- BEGIN WIDGET THUMB -->
+                    <a href="notification" style="text-decoration: none">
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading">通知管理</h4>
+                        <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-blue icon-info"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle">官方号/通知数</span>
+                                <span class="widget-thumb-body-stat">
+                                    <span data-counter="counterup" data-value="<s:property value="dashDto.office_num" />"><s:property value="dashDto.office_num" /></span> /
+                                   <span data-counter="counterup" data-value="<s:property value="dashDto.notification_num" />"><s:property value="dashDto.notification_num" /></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- END WIDGET THUMB -->
+                </div>
+            </div>
+            <!-- end dash board-->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>数据统计暂时就不做了<img src="https://imgsa.baidu.com/forum/w%3D580/sign=423431379eeef01f4d1418cdd0ff99e0/7b4a6a600c3387441d43a72f5b0fd9f9d62aa04a.jpg" width="32px"/> </h3>
+                    <p>毕竟后端一个，不太会做界面= =</p>
+                </div>
             </div>
             <!-- END PAGE BASE CONTENT -->
         </div>
@@ -221,53 +268,13 @@
 <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
-        type="text/javascript"></script>
+<script src="../assets/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script>
-    $(document).ready(function () {
-        $('#notificationTable').DataTable({
-            "order": [[3, "desc"]],
-            "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
-            "buttons": [
-                { extend: 'print', className: 'btn dark btn-outline' },
-                { extend: 'pdf', className: 'btn green btn-outline' },
-                { extend: 'csv', className: 'btn purple btn-outline ' },
-            ],
-            "pageLength":50,
-            language: {
-                "processing": "处理中...",
-                "lengthMenu": "显示 _MENU_ 项结果",
-                "zeroRecords": "没有匹配结果",
-                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "infoFiltered": "(由 _MAX_ 项结果过滤)",
-                "infoPostFix": "",
-                "search": "搜索:",
-                "url": "",
-                "emptyTable": "表中数据为空",
-                "loadingRecords": "载入中...",
-                "infoThousands": ",",
-                "paginate": {
-                    "first": "首页",
-                    "previous": "上页",
-                    "next": "下页",
-                    "last": "末页"
-                },
-                "aria": {
-                    "sortAscending": ": 以升序排列此列",
-                    "sortDescending": ": 以降序排列此列"
-                }
-            }
-        });
-    });
-</script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="../assets/layouts/layout5/scripts/layout.min.js" type="text/javascript"></script>

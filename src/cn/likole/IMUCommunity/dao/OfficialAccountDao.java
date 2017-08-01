@@ -23,4 +23,17 @@ public class OfficialAccountDao extends HibernateDaoSupport{
         if(list.size()>0) return list.get(0);
         return null;
     }
+
+    public List<OfficialAccount> getList(){
+        return
+                (List<OfficialAccount>) getHibernateTemplate().find("from OfficialAccount");
+    }
+
+    public int getNum(){
+        return ((Long)getHibernateTemplate().iterate("select count(*) from OfficialAccount ").next()).intValue();
+    }
+
+    public void save(OfficialAccount officialAccount){
+        getHibernateTemplate().save(officialAccount);
+    }
 }

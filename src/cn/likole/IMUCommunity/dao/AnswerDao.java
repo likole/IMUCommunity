@@ -34,4 +34,8 @@ public class AnswerDao extends HibernateDaoSupport{
         if(answers.size()>0) return answers.get(0);
         return null;
     }
+
+    public int getNum(){
+         return ((Long)getHibernateTemplate().iterate("select count(*) from Answer ").next()).intValue();
+    }
 }

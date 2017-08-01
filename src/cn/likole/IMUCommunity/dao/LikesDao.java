@@ -32,4 +32,8 @@ public class LikesDao extends HibernateDaoSupport {
     public List<Likes> getAllByTid(int tid){
         return (List<Likes>) this.getHibernateTemplate().find("from Likes where tid=?",tid);
     }
+
+    public int getNum(){
+        return ((Long)getHibernateTemplate().iterate("select count(*) from Likes ").next()).intValue();
+    }
 }

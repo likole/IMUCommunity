@@ -11,12 +11,21 @@ public class TucaoAdminDto {
     int tid;
     int uid;
     String name;
+    String avatar;
     String content;
     String time;
     int like_num;
     int comment_num;
     List<LikesAdminDto> like;
     List<Comments> comments;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public int getTid() {
         return tid;

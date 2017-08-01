@@ -83,21 +83,35 @@
                             <a href="javascript:;" class="text-uppercase">
                                 <i class="icon-home"></i> 内容管理 </a>
                             <ul class="dropdown-menu dropdown-menu-fw">
-                                <li class="active">
+                                <li>
+                                    <a href="dash">
+                                        <i class="icon-graph"></i> 总览 </a>
+                                </li>
+                                <li>
                                     <a href="user">
-                                        <i class="icon-graph"></i> 用户管理 </a>
+                                        <i class="icon-user"></i> 用户管理 </a>
                                 </li>
                                 <li>
                                     <a href="tucao">
-                                        <i class="icon-bar-chart"></i> 吐槽管理 </a>
+                                        <i class="icon-bubble"></i> 吐槽管理 </a>
                                 </li>
                                 <li>
                                     <a href="ask">
-                                        <i class="icon-bulb"></i> 咨询管理 </a>
+                                        <i class="icon-directions"></i> 咨询管理 </a>
                                 </li>
-                                <li>
-                                    <a href="notification">
-                                        <i class="icon-graph"></i> 通知管理 </a>
+                                <li class="dropdown more-dropdown-sub active" >
+                                    <a>
+                                        <i class="icon-info"></i> 通知管理 </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="office">
+                                                <i class="icon-briefcase"></i> 官方帐号管理 </a>
+                                        </li>
+                                        <li class="active">
+                                            <a>
+                                                <i class="icon-info"></i> 通知管理 </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -169,9 +183,9 @@
                                 <span class="font-red-thunderbird glyphicon glyphicon-ok"/>
                             </s:if></td>
                             <td> <s:if test="#n.stick==1">
-                                <a class="btn dark btn-outline sbold uppercase">取消置顶</a>
+                                <a class="btn dark btn-outline sbold uppercase" href="notification_stick?nid=<s:property value="#n.nid"/>">取消置顶</a>
                             </s:if><s:else>
-                                <a class="btn red btn-outline sbold uppercase">置顶</a>
+                                <a class="btn red btn-outline sbold uppercase" href="notification_stick?nid=<s:property value="#n.nid"/>">置顶</a>
                             </s:else></td>
                         </tr>
                     </s:iterator>
