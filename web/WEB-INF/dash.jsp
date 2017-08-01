@@ -229,7 +229,7 @@
             <!-- end dash board-->
             <div class="row">
                 <div class="col-md-12">
-                    <h3>数据统计暂时就不做了<img src="https://imgsa.baidu.com/forum/w%3D580/sign=423431379eeef01f4d1418cdd0ff99e0/7b4a6a600c3387441d43a72f5b0fd9f9d62aa04a.jpg" width="32px"/> </h3>
+                    <h3>数据统计暂时就不做了<img src="../assets/layouts/layout5/img/xjj.gif" width="32px"/></h3>
                     <p>毕竟后端一个，不太会做界面= =</p>
                 </div>
             </div>
