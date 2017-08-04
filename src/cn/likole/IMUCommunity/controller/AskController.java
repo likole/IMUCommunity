@@ -5,6 +5,7 @@ import cn.likole.IMUCommunity.service.AskService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.Map;
  * Created by likole on 7/27/17.
  */
 @Controller
+@Scope("prototype")
 public class AskController extends ActionSupport implements ModelDriven<Ask> {
 
     @Autowired

@@ -10,6 +10,8 @@ import cn.likole.IMUCommunity.service.AdminService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
@@ -19,6 +21,8 @@ import java.util.Properties;
 /**
  * Created by likole on 7/28/17.
  */
+@Controller
+@Scope("prototype")
 public class AdminController extends ActionSupport {
 
     String username;//用户名
