@@ -4,6 +4,7 @@ import cn.likole.IMUCommunity.dao.CommentsDao;
 import cn.likole.IMUCommunity.dao.LikesDao;
 import cn.likole.IMUCommunity.dao.TucaoDao;
 import cn.likole.IMUCommunity.dao.UserDao;
+import cn.likole.IMUCommunity.dto.TucaoCommentDto;
 import cn.likole.IMUCommunity.dto.TucaoItemDto;
 import cn.likole.IMUCommunity.dto.TucaoListDto;
 import cn.likole.IMUCommunity.entity.Comments;
@@ -207,15 +208,19 @@ public class TucaoService {
      * @param comment
      * @return
      */
-    public int addComment(int tid, String comment) {
+    public int addComment(int tid, String comment,String token) {
 
         Tucao tucao=tucaoDao.getByTid(tid);
         if (tucao == null) return 103;
         if (comment.length() < 3) return 104;
 
+        User user=userDao.getByToken(token);
+        if(user==null) return 101;
+
         Comments comments = new Comments();
         comments.setTid(tid);
         comments.setContent(comment);
+        comments.setUid(user.getUid());
         tucao.setCommentNum(tucao.getCommentNum()+1);
         commentsDao.save(comments);
 
@@ -256,9 +261,31 @@ public class TucaoService {
 
 
         //评论
-        tucaoItemDto.setComments(commentsDao.getByTid(tid));
+        List<Comments> tucaoComments=commentsDao.getAllByTid(tid);
+        List<TucaoCommentDto> tucaoComments1=new ArrayList<>();
+
+        for(Comments comments:tucaoComments)
+        {
+            tucaoComments1.add(comments2tucaoComment(comments));
+        }
+
+        tucaoItemDto.setComments(tucaoComments1);
 
         return tucaoItemDto;
+    }
+
+
+    /**
+     * 吐槽评论填充
+     * @param comments
+     * @return
+     */
+    private TucaoCommentDto comments2tucaoComment(Comments comments)
+    {
+        TucaoCommentDto tucaoCommentDto=new TucaoCommentDto();
+        tucaoCommentDto.setGender(userDao.getByUid(comments.getUid()).getGender());
+        tucaoCommentDto.setComments(comments.getContent());
+        return tucaoCommentDto;
     }
 
 

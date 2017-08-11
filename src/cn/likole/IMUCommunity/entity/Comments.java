@@ -13,6 +13,7 @@ public class Comments {
     private int cid;
     private int tid;
     private String content;
+    private Integer uid;
 
     @Id
     @Column(name = "cid")
@@ -64,5 +65,15 @@ public class Comments {
         result = 31 * result + tid;
         result = 31 * result + (content != null ? content.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "uid")
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 }

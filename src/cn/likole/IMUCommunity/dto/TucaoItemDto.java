@@ -22,7 +22,7 @@ public class TucaoItemDto {
         this.gender = gender;
     }
 
-    List<String> comments;
+    List<TucaoCommentDto> comments;
 
     public int getTid() {
         return tid;
@@ -56,11 +56,11 @@ public class TucaoItemDto {
         this.like_num = like_num;
     }
 
-    public List<String> getComments() {
+    public List<TucaoCommentDto> getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(List<TucaoCommentDto> comments) {
         this.comments = comments;
     }
 
@@ -79,4 +79,8 @@ public class TucaoItemDto {
     public void setLiked(boolean liked) {
         this.liked = liked;
     }
+
+
+
 }
+

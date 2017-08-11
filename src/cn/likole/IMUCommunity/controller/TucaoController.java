@@ -79,7 +79,7 @@ public class TucaoController extends ActionSupport {
     }
 
     public String addComment(){
-        setMessage(tucaoService.addComment(data.getTid(),data.getComment()));
+        setMessage(tucaoService.addComment(data.getTid(),data.getComment(),data.getToken()));
         return  SUCCESS;
     }
 
