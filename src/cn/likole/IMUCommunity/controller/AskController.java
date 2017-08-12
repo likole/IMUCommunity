@@ -64,7 +64,7 @@ public class AskController extends ActionSupport implements ModelDriven<Ask> {
 
     public String getList(){
         setMessage(0);
-        map.put("data",askService.getList());
+        map.put("data",askService.getList(token));
         return SUCCESS;
     }
 
@@ -91,13 +91,13 @@ public class AskController extends ActionSupport implements ModelDriven<Ask> {
 
     public String search(){
         setMessage(0);
-        map.put("data",askService.search(key));
+        map.put("data",askService.search(key,token));
         return SUCCESS;
     }
 
     public String getAnswers(){
         setMessage(0);
-        map.put("data",askService.getAnswers(ask.getAid()));
+        map.put("data",askService.getAnswers(ask.getAid(),token));
         return SUCCESS;
     }
 

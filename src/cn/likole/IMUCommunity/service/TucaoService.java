@@ -103,8 +103,9 @@ public class TucaoService {
      */
     public List<TucaoListDto> getLiked(String selfToken) {
         //获取uid
-        User self = userDao.getByToken(selfToken);
         if (selfToken == null) return null;
+        User self = userDao.getByToken(selfToken);
+        if (self == null) return null;
         int uid = self.getUid();
 
         List<Likes> likesList = likesDao.getAllByUid(uid);
@@ -120,6 +121,7 @@ public class TucaoService {
             tucaoListDto.setLike_num(tucao.getCommentNum());
             tucaoListDto.setContent(tucao.getContent());
             tucaoListDto.setLiked(true);
+            tucaoListDto.setSelf(self.getUid()==tucao.getUid());
             tucaoListDto.setGender(userDao.getByUid(tucao.getUid()).getGender());
 
             tucaoListDtos.add(tucaoListDto);
@@ -164,6 +166,7 @@ public class TucaoService {
             //喜欢
             if (showLiked == 1)
                 rsTmp.setLiked(likesDao.exist(tucao.getTid(), uid));
+                rsTmp.setSelf(tucao.getUid()==uid);
 
             rs.add(rsTmp);
         }
@@ -194,6 +197,7 @@ public class TucaoService {
             rsTmp.setComment_num(tucao.getCommentNum());
             rsTmp.setTime(TimeFormatUtil.formatTime(tucao.getTime()));
             rsTmp.setGender(userDao.getByUid(tucao.getUid()).getGender());
+            rsTmp.setSelf(true);
             rsTmp.setLiked(likesDao.exist(tucao.getTid(), user.getUid()));
             rs.add(rsTmp);
         }

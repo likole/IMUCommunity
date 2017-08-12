@@ -11,6 +11,15 @@ public class TucaoListDto {
     int like_num;
     boolean liked;
     int gender;
+    boolean self;
+
+    public boolean isSelf() {
+        return self;
+    }
+
+    public void setSelf(boolean self) {
+        this.self = self;
+    }
 
     public int getGender() {
         return gender;
