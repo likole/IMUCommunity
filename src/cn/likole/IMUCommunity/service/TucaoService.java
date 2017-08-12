@@ -173,6 +173,36 @@ public class TucaoService {
 
 
     /**
+     * 获取自己的吐槽
+     * @param selfToken
+     * @return
+     */
+    public List<TucaoListDto> getSelf(String selfToken)
+    {
+        User user=userDao.getByToken(selfToken);
+        if(user==null) return null;
+
+        List<TucaoListDto> rs = new ArrayList<>();
+        List<Tucao> tmp = tucaoDao.getByUid(user.getUid());
+
+        for (Tucao tucao : tmp) {
+            TucaoListDto rsTmp = new TucaoListDto();
+
+            rsTmp.setId(tucao.getTid());
+            rsTmp.setContent(tucao.getContent());
+            rsTmp.setLike_num(tucao.getLikeNum());
+            rsTmp.setComment_num(tucao.getCommentNum());
+            rsTmp.setTime(TimeFormatUtil.formatTime(tucao.getTime()));
+            rsTmp.setGender(userDao.getByUid(tucao.getUid()).getGender());
+            rsTmp.setLiked(likesDao.exist(tucao.getTid(), user.getUid()));
+            rs.add(rsTmp);
+        }
+
+        return rs;
+    }
+
+
+    /**
      * 喜欢
      *
      * @param tid

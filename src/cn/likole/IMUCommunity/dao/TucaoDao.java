@@ -35,6 +35,11 @@ public class TucaoDao extends HibernateDaoSupport{
         });
     }
 
+    public List<Tucao> getByUid(int uid)
+    {
+        return (List<Tucao>) getHibernateTemplate().find("from Tucao where uid=?",uid);
+    }
+
     public List<Tucao> getAll(){
        return (List<Tucao>) getHibernateTemplate().find("from Tucao order by tid desc ");
     }

@@ -61,6 +61,12 @@ public class TucaoController extends ActionSupport {
         return SUCCESS;
     }
 
+    public String getSelf(){
+        setMessage(0);
+        map.put("data",tucaoService.getSelf(data.getSelfToken()));
+        return SUCCESS;
+    }
+
     public String getLiked(){
         setMessage(0);
         map.put("data",tucaoService.getLiked(data.getSelfToken()));
