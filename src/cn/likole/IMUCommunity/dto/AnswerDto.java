@@ -9,6 +9,15 @@ public class AnswerDto {
     String content;
     String time;
     String avatar;
+    boolean self;
+
+    public boolean isSelf() {
+        return self;
+    }
+
+    public void setSelf(boolean self) {
+        this.self = self;
+    }
 
     public String getAvatar() {
         return avatar;

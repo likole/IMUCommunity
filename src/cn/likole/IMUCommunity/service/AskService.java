@@ -37,7 +37,11 @@ public class AskService {
      *
      * @return
      */
-    public List<AskDto> getList() {
+    public List<AskDto> getList(String token) {
+        User self=null;
+
+        if(token!=null) self=userDao.getByToken(token);
+
         List<Ask> asks = askDao.getList();
 
         List<AskDto> askDtos = new ArrayList<>();
@@ -51,6 +55,7 @@ public class AskService {
             User user=userDao.getByUid(ask.getUid());
             askDto.setName(user.getName());
             askDto.setAvatar(user.getAvatar());
+            if(self!=null) askDto.setSelf(self.getUid()==user.getUid());
             askDtos.add(askDto);
         }
 
@@ -64,7 +69,12 @@ public class AskService {
      * @param key
      * @return
      */
-    public List<AskDto> search(String key) {
+    public List<AskDto> search(String key,String token) {
+
+        User self=null;
+
+        if(token!=null) self=userDao.getByToken(token);
+
         List<Ask> asks = askDao.getLike(key);
 
         List<AskDto> askDtos = new ArrayList<>();
@@ -78,6 +88,7 @@ public class AskService {
             User user=userDao.getByUid(ask.getUid());
             askDto.setName(user.getName());
             askDto.setAvatar(user.getAvatar());
+            if(self!=null) askDto.setSelf(self.getUid()==user.getUid());
 
             askDtos.add(askDto);
         }
@@ -110,6 +121,7 @@ public class AskService {
             askDto.setDetail(ask.getDetail());
             askDto.setName(user.getName());
             askDto.setAvatar(user.getAvatar());
+            askDto.setSelf(true);
 
             askDtos.add(askDto);
         }
@@ -140,6 +152,23 @@ public class AskService {
         return 0;
     }
 
+
+    /**
+     * 编辑咨询
+     * @param aid
+     * @param token
+     * @param detail
+     * @return
+     */
+    public int edit(int aid,String token,String detail) {
+        User user=userDao.getByToken(token);
+        if(user==null) return 101;
+        Ask ask=askDao.getByAid(aid);
+        if(ask.getUid()!=user.getUid()) return 105;
+        ask.setDetail(detail);
+        return 0;
+    }
+
     /**
      * 删除问题
      *
@@ -161,7 +190,10 @@ public class AskService {
      * @param aid
      * @return
      */
-    public List<AnswerDto> getAnswers(int aid) {
+    public List<AnswerDto> getAnswers(int aid,String token) {
+        User self=null;
+        if(token!=null) self=userDao.getByToken(token);
+
         List<Answer> answers = answerDao.getByAid(aid);
         List<AnswerDto> answerDtos = new ArrayList<>();
 
@@ -171,6 +203,7 @@ public class AskService {
             User user=userDao.getByUid(answer.getUid());
             answerDto.setName(user.getName());
             answerDto.setAvatar(user.getAvatar());
+            if(self!=null) answerDto.setSelf(self.getUid()==user.getUid());
             answerDto.setContent(answer.getContent());
             answerDto.setTime(TimeFormatUtil.formatTime(answer.getTime()));
 

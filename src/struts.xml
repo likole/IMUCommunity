@@ -46,7 +46,8 @@
         <action name="notification" class="cn.likole.IMUCommunity.controller.AdminController" method="notification">
             <result>/WEB-INF/notification.jsp</result>
         </action>
-        <action name="notification_stick" class="cn.likole.IMUCommunity.controller.AdminController" method="notification_stick">
+        <action name="notification_stick" class="cn.likole.IMUCommunity.controller.AdminController"
+                method="notification_stick">
             <result type="redirectAction">notification</result>
             <result type="redirectAction" name="o">notification_o?oid=${oid}</result>
         </action>

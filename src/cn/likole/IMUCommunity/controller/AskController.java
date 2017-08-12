@@ -79,6 +79,11 @@ public class AskController extends ActionSupport implements ModelDriven<Ask> {
         return SUCCESS;
     }
 
+    public String edit(){
+        setMessage(askService.edit(ask.getAid(),token,ask.getDetail()));
+        return SUCCESS;
+    }
+
     public String delete(){
         setMessage(askService.delete(ask.getAid(),token));
         return SUCCESS;

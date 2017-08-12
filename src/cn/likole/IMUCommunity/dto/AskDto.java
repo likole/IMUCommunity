@@ -10,6 +10,15 @@ public class AskDto {
     String time;
     String name;
     String avatar;
+    boolean self;
+
+    public boolean isSelf() {
+        return self;
+    }
+
+    public void setSelf(boolean self) {
+        this.self = self;
+    }
 
     public String getAvatar() {
         return avatar;
