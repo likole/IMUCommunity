@@ -2,9 +2,12 @@ package cn.likole.IMUCommunity.controller;
 
 import cn.likole.IMUCommunity.entity.User;
 import cn.likole.IMUCommunity.service.UserService;
+import cn.likole.IMUCommunity.util.COSUtil;
 import cn.likole.IMUCommunity.util.MD5Util;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.qcloud.cos.COSClient;
+import com.qcloud.cos.request.UploadFileRequest;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -112,6 +115,10 @@ public class UserController extends ActionSupport implements ModelDriven<User> {
 
         inputStream.close();
         outputStream.close();
+
+        COSClient cosClient= COSUtil.getClient();
+        UploadFileRequest uploadFileRequest = new UploadFileRequest("imucommunity", "/avatar/"+fileName, path+File.separator+fileName);
+        String uploadFileRet = cosClient.uploadFile(uploadFileRequest);
 
         setMessage(userService.setAvatar(user.getToken(),fileName));
         return SUCCESS;

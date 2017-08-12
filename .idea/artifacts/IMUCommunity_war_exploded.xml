@@ -15,6 +15,9 @@
           <element id="library" level="project" name="spring" />
           <element id="library" level="project" name="EE_6" />
           <element id="library" level="project" name="mysql-connector-java-5.1.25-bin" />
+          <element id="library" level="project" name="commons-codec-1.10" />
+          <element id="library" level="project" name="httpclient-4.4-alpha1" />
+          <element id="library" level="project" name="json-20160810" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="IMUCommunity/javaeeApplication/javaEEApplication" />

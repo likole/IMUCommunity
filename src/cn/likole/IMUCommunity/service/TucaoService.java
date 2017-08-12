@@ -244,6 +244,7 @@ public class TucaoService {
         }
 
         Tucao tucao = tucaoDao.getByTid(tid);
+        if(tucao==null) return null;
         TucaoItemDto tucaoItemDto = new TucaoItemDto();
 
         tucaoItemDto.setTid(tid);

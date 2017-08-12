@@ -26,7 +26,7 @@ public class HeaderFilter implements Filter {
 
         if ("1".equals(properties.getProperty("allow_origin"))) response.setHeader("Access-Control-Allow-Origin", "*");
 
-        if ("0".equals(properties.getProperty("enable_site")) && !request.getRequestURI().contains("/admin/"))
+        if ("0".equals(properties.getProperty("enable_site")) && !(request.getRequestURI().contains("/admin/")||request.getRequestURI().contains("/assets/")))
             request.getRequestDispatcher("/WEB-INF/closed.jsp").forward(request, response);
 
         chain.doFilter(req, resp);

@@ -5,7 +5,7 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.devMode" value="false"/>
     <constant name="struts.multipart.saveDir" value="/tmp"/>
     <package name="admin" extends="struts-default" namespace="/admin">
         <default-action-ref name="login"/>
