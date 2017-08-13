@@ -167,7 +167,7 @@
                         <tr>
                             <td><s:property value="#t.tid"/></td>
                             <td><s:property value="#t.time"/></td>
-                            <td><a onclick="$.searchTable('<s:property value="#t.name"/>')"> <img class="avatar" src="../avatar/<s:property value="#t.avatar"/>" width="30px"><s:property value="#t.name"/>(<s:property value="#t.uid" />)</a></td>
+                            <td><a onclick="$.searchTable('<s:property value="#t.name"/>')"> <img class="avatar" src="http://imucommunity-1252858792.image.myqcloud.com/avatar/<s:property value="#t.avatar"/>" width="30px"><s:property value="#t.name"/>(<s:property value="#t.uid" />)</a></td>
                             <td><s:property value="#t.content"/></td>
                             <td><a  data-toggle="modal" href="#modallike<s:property value="#t.tid"/>"><s:property value="#t.like_num"/></a>/<a  data-toggle="modal" href="#modalcomment<s:property value="#t.tid"/>"><s:property value="#t.comment_num"/></a></td>
                             <td>

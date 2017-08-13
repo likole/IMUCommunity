@@ -168,7 +168,7 @@
                             <td><s:property value="#a.aid"/></td>
                             <td><s:property value="#a.title"/></td>
                             <td><s:property value="#a.detail"/></td>
-                            <td><img class="avatar" src="../avatar/<s:property value="#a.avatar"/>" width="30px"> <s:property value="#a.name"/>(<s:property value="#a.uid"/>)</td>
+                            <td><img class="avatar" src="http://imucommunity-1252858792.image.myqcloud.com/avatar/<s:property value="#a.avatar"/>" width="30px"> <s:property value="#a.name"/>(<s:property value="#a.uid"/>)</td>
                             <td><s:property value="#a.time"/></td>
                             <td>
                                 <a class="btn blue btn-outline" href="ask_detail?aid=<s:property value="#a.aid"/>">详情</a>

@@ -135,7 +135,7 @@ public class UserController extends ActionSupport implements ModelDriven<User> {
 
         //云端存储
         COSClient cosClient= COSUtil.getClient();
-        UploadFileRequest uploadFileRequest = new UploadFileRequest("imucommunity", "/avatar/"+fileName, path+File.separator+fileName);
+        UploadFileRequest uploadFileRequest = new UploadFileRequest("imucommunity", "/avatar/"+fileName, file.getAbsolutePath());
         String uploadFileRet = cosClient.uploadFile(uploadFileRequest);
 
         setMessage(userService.setAvatar(user.getToken(),fileName));

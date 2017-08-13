@@ -166,7 +166,7 @@
                     <tbody>
                     <s:iterator value="users" id="u">
                         <tr>
-                            <td><img class="avatar popovers" data-html="true" data-container="body" data-trigger="hover" data-placement="right" data-content="<img src='../avatar/<s:property value="#u.avatar"/>' width=200px/>" data-original-title="用户头像" src="../avatar/<s:property value="#u.avatar"/>" width="30px"> </td>
+                            <td><img class="avatar popovers" data-html="true" data-container="body" data-trigger="hover" data-placement="right" data-content="<img src='http://imucommunity-1252858792.image.myqcloud.com/avatar/<s:property value="#u.avatar"/>' width=200px/>" data-original-title="用户头像" src="http://imucommunity-1252858792.image.myqcloud.com/avatar/<s:property value="#u.avatar"/>" width="30px"> </td>
                             <td><s:property value="#u.uid"/></td>
                             <td><s:property value="#u.name"/></td>
                             <td><s:property value="#u.password"/></td>

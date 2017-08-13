@@ -158,7 +158,7 @@
                 <div class="portlet light profile-sidebar-portlet bordered col-md-2 col-xs-4">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="../avatar/<s:property value="askAdminDto.avatar" />" class="img-responsive" alt="">
+                        <img src="http://imucommunity-1252858792.image.myqcloud.com/avatar/<s:property value="askAdminDto.avatar" />" class="img-responsive" alt="">
                     </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
@@ -189,7 +189,7 @@
                 <s:iterator value="askAdminDto.answerAdminDtos" id="a">
                     <tr>
                         <td><s:property value="#a.ansid"/></td>
-                        <td><img class="avatar" src="../avatar/<s:property value="#a.avatar"/>" width="30px">
+                        <td><img class="avatar" src="http://imucommunity-1252858792.image.myqcloud.com/avatar/<s:property value="#a.avatar"/>" width="30px">
                             <s:property value="#a.name"/>(<s:property value="#a.uid"/>)
                         </td>
                         <td><s:property value="#a.content"/></td>
