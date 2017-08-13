@@ -39,6 +39,7 @@ public class ErrorController extends ActionSupport {
         errorInfo.put(302,"内容不能为空");
         errorInfo.put(303,"该评论不存在");
         errorInfo.put(401,"文件过大");
+        errorInfo.put(402,"图片格式有误");
     }
 
     public  static String getErrorInfo(int code)

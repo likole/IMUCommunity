@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
@@ -95,27 +97,43 @@ public class UserController extends ActionSupport implements ModelDriven<User> {
     }
 
     public String setAvatar() throws IOException, NoSuchAlgorithmException {
-        if(file.length()>1000000)
+        //限制长度
+        if(file.length()>5000000)
         {
             setMessage(401);
             return SUCCESS;
         }
+
+        //获取路径
         String path= ServletActionContext.getServletContext().getRealPath("/avatar");
         String fileName=MD5Util.encode(fileFileName+ Calendar.getInstance().getTimeInMillis())+fileFileName.substring(fileFileName.lastIndexOf('.'));
-        InputStream inputStream=new FileInputStream(file);
-        OutputStream outputStream=new FileOutputStream(new File(path,fileName));
 
-        byte[] bytes=new byte[1024];
-
-        int len=0;
-
-        while (-1!=(len=inputStream.read(bytes,0,bytes.length))){
-            outputStream.write(bytes);
+        //限制格式
+        Image image= ImageIO.read(file);
+        if(image==null)
+        {
+            setMessage(402);
+            return SUCCESS;
         }
 
-        inputStream.close();
-        outputStream.close();
+        //本地存储
 
+//        InputStream inputStream=new FileInputStream(file);
+//        OutputStream outputStream=new FileOutputStream(new File(path,fileName));
+//
+//        byte[] bytes=new byte[1024];
+//
+//        int len=0;
+//
+//        while (-1!=(len=inputStream.read(bytes,0,bytes.length))){
+//            outputStream.write(bytes);
+//        }
+//
+//        inputStream.close();
+//        outputStream.close();
+
+
+        //云端存储
         COSClient cosClient= COSUtil.getClient();
         UploadFileRequest uploadFileRequest = new UploadFileRequest("imucommunity", "/avatar/"+fileName, path+File.separator+fileName);
         String uploadFileRet = cosClient.uploadFile(uploadFileRequest);
