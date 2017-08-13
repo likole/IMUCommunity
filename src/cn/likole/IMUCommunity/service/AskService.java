@@ -38,9 +38,9 @@ public class AskService {
      * @return
      */
     public List<AskDto> getList(String token) {
-        User self=null;
+        User self = null;
 
-        if(token!=null) self=userDao.getByToken(token);
+        if (token != null) self = userDao.getByToken(token);
 
         List<Ask> asks = askDao.getList();
 
@@ -52,14 +52,41 @@ public class AskService {
             askDto.setTitle(ask.getTitle());
             askDto.setTime(TimeFormatUtil.formatTime(ask.getTime()));
             askDto.setDetail(ask.getDetail());
-            User user=userDao.getByUid(ask.getUid());
+            User user = userDao.getByUid(ask.getUid());
             askDto.setName(user.getName());
             askDto.setAvatar(user.getAvatar());
-            if(self!=null) askDto.setSelf(self.getUid()==user.getUid());
+            if (self != null) askDto.setSelf(self.getUid() == user.getUid());
             askDtos.add(askDto);
         }
 
         return askDtos;
+    }
+
+
+    /**
+     * 根据id获取咨询
+     * @param id
+     * @param token
+     * @return
+     */
+    public AskDto getById(int id, String token) {
+        User self = null;
+
+        if (token != null) self = userDao.getByToken(token);
+
+        Ask ask = askDao.getByAid(id);
+
+        AskDto askDto = new AskDto();
+        askDto.setAid(ask.getAid());
+        askDto.setTitle(ask.getTitle());
+        askDto.setTime(TimeFormatUtil.formatTime(ask.getTime()));
+        askDto.setDetail(ask.getDetail());
+        User user = userDao.getByUid(ask.getUid());
+        askDto.setName(user.getName());
+        askDto.setAvatar(user.getAvatar());
+        if (self != null) askDto.setSelf(self.getUid() == user.getUid());
+
+        return askDto;
     }
 
 
@@ -69,11 +96,11 @@ public class AskService {
      * @param key
      * @return
      */
-    public List<AskDto> search(String key,String token) {
+    public List<AskDto> search(String key, String token) {
 
-        User self=null;
+        User self = null;
 
-        if(token!=null) self=userDao.getByToken(token);
+        if (token != null) self = userDao.getByToken(token);
 
         List<Ask> asks = askDao.getLike(key);
 
@@ -85,10 +112,10 @@ public class AskService {
             askDto.setTitle(ask.getTitle());
             askDto.setTime(TimeFormatUtil.formatTime(ask.getTime()));
             askDto.setDetail(ask.getDetail());
-            User user=userDao.getByUid(ask.getUid());
+            User user = userDao.getByUid(ask.getUid());
             askDto.setName(user.getName());
             askDto.setAvatar(user.getAvatar());
-            if(self!=null) askDto.setSelf(self.getUid()==user.getUid());
+            if (self != null) askDto.setSelf(self.getUid() == user.getUid());
 
             askDtos.add(askDto);
         }
@@ -155,16 +182,17 @@ public class AskService {
 
     /**
      * 编辑咨询
+     *
      * @param aid
      * @param token
      * @param detail
      * @return
      */
-    public int edit(int aid,String token,String detail) {
-        User user=userDao.getByToken(token);
-        if(user==null) return 101;
-        Ask ask=askDao.getByAid(aid);
-        if(ask.getUid()!=user.getUid()) return 105;
+    public int edit(int aid, String token, String detail) {
+        User user = userDao.getByToken(token);
+        if (user == null) return 101;
+        Ask ask = askDao.getByAid(aid);
+        if (ask.getUid() != user.getUid()) return 105;
         ask.setDetail(detail);
         return 0;
     }
@@ -187,12 +215,13 @@ public class AskService {
 
     /**
      * 获取回答
+     *
      * @param aid
      * @return
      */
-    public List<AnswerDto> getAnswers(int aid,String token) {
-        User self=null;
-        if(token!=null) self=userDao.getByToken(token);
+    public List<AnswerDto> getAnswers(int aid, String token) {
+        User self = null;
+        if (token != null) self = userDao.getByToken(token);
 
         List<Answer> answers = answerDao.getByAid(aid);
         List<AnswerDto> answerDtos = new ArrayList<>();
@@ -200,10 +229,10 @@ public class AskService {
         for (Answer answer : answers) {
             AnswerDto answerDto = new AnswerDto();
             answerDto.setId(answer.getAnsid());
-            User user=userDao.getByUid(answer.getUid());
+            User user = userDao.getByUid(answer.getUid());
             answerDto.setName(user.getName());
             answerDto.setAvatar(user.getAvatar());
-            if(self!=null) answerDto.setSelf(self.getUid()==user.getUid());
+            if (self != null) answerDto.setSelf(self.getUid() == user.getUid());
             answerDto.setContent(answer.getContent());
             answerDto.setTime(TimeFormatUtil.formatTime(answer.getTime()));
 
@@ -215,17 +244,18 @@ public class AskService {
 
     /**
      * 添加回答
+     *
      * @param aid
      * @param token
      * @param content
      * @return
      */
-    public int addAnswer(int aid,String token ,String content){
-        User user=userDao.getByToken(token);
-        if(user==null) return 101;
-        if(content==null||content.equals("")) return 302;
+    public int addAnswer(int aid, String token, String content) {
+        User user = userDao.getByToken(token);
+        if (user == null) return 101;
+        if (content == null || content.equals("")) return 302;
 
-        Answer answer=new Answer();
+        Answer answer = new Answer();
         answer.setAid(aid);
         answer.setContent(content);
         answer.setUid(user.getUid());
@@ -238,20 +268,21 @@ public class AskService {
 
     /**
      * 编辑回答
+     *
      * @param ansid
      * @param token
      * @param content
      * @return
      */
-    public int editAnswer(int ansid,String token ,String content){
-        User user=userDao.getByToken(token);
-        if(user==null) return 101;
-        if(content==null||content.equals("")) return 302;
+    public int editAnswer(int ansid, String token, String content) {
+        User user = userDao.getByToken(token);
+        if (user == null) return 101;
+        if (content == null || content.equals("")) return 302;
 
-        Answer answer=answerDao.getByAnsid(ansid);
-        if(answer==null) return 303;
+        Answer answer = answerDao.getByAnsid(ansid);
+        if (answer == null) return 303;
 
-        if(answer.getUid()==user.getUid()) answer.setContent(content);
+        if (answer.getUid() == user.getUid()) answer.setContent(content);
         else return 105;
 
         return 0;
@@ -260,18 +291,19 @@ public class AskService {
 
     /**
      * 删除回答
+     *
      * @param ansid
      * @param token
      * @return
      */
-    public int deleteAnswer(int ansid,String token){
-        User user=userDao.getByToken(token);
-        if(user==null) return 101;
+    public int deleteAnswer(int ansid, String token) {
+        User user = userDao.getByToken(token);
+        if (user == null) return 101;
 
-        Answer answer=answerDao.getByAnsid(ansid);
-        if(answer==null) return 303;
+        Answer answer = answerDao.getByAnsid(ansid);
+        if (answer == null) return 303;
 
-        if(answer.getUid()!=user.getUid()) return 105;
+        if (answer.getUid() != user.getUid()) return 105;
 
         answerDao.delete(ansid);
 

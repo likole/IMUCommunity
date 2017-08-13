@@ -68,6 +68,13 @@ public class AskController extends ActionSupport implements ModelDriven<Ask> {
         return SUCCESS;
     }
 
+    public String getByAid(){
+        setMessage(0);
+        map.put("data",askService.getById(ask.getAid(),token));
+        return SUCCESS;
+    }
+
+
     public String getSelf(){
         setMessage(0);
         map.put("data",askService.getSelfList(token));
